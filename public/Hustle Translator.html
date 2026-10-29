@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hustle Translator – Forge ton titre</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Pixelify+Sans:wght@400;600&display=swap">
+<style>
+:root{
+  --sea:#47a9a8; --sea2:#3a9498; --foam:#f3efd9; --parch:#f1e7c6; --parch2:#dccd9c;
+  --ink:#25384a; --ink2:#4a5d6e; --red:#b8404f; --gold:#ffe033; --grass:#7ba33a;
+  --shadow:rgba(20,40,50,.35);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--sea:#1f6469;--sea2:#17525a;--foam:#cfd0bd;--parch:#d9cd9f;--parch2:#b9aa77;--ink:#1c2c3b;--ink2:#34475a}
+}
+:root[data-theme="dark"]{--sea:#1f6469;--sea2:#17525a;--foam:#cfd0bd;--parch:#d9cd9f;--parch2:#b9aa77;--ink:#1c2c3b;--ink2:#34475a}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background-color:var(--sea);color:var(--ink);font-family:"Pixelify Sans","Trebuchet MS",system-ui,sans-serif;font-size:17px;line-height:1.5;overflow-x:hidden;
+  background-image:
+   repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.06) 46px 48px),
+   radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.12),transparent 55%),
+   radial-gradient(ellipse at 90% 100%,var(--sea2),transparent 60%)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* nuages : un seul mouvement ambiant, lent */
+.cloud{position:fixed;height:34px;width:130px;background:var(--foam);border-radius:34px;opacity:.9;box-shadow:0 8px 0 rgba(20,40,50,.18);animation:drift 80s linear infinite;pointer-events:none}
+.cloud::before,.cloud::after{content:"";position:absolute;background:var(--foam);border-radius:50%}
+.cloud::before{width:56px;height:56px;left:18px;top:-26px}
+.cloud::after{width:42px;height:42px;left:68px;top:-18px}
+.c1{top:9%;left:-160px}
+.c2{top:44%;left:-160px;animation-duration:120s;animation-delay:-50s;transform:scale(1.5)}
+.c3{top:78%;left:-160px;animation-duration:95s;animation-delay:-20s;transform:scale(.8)}
+@keyframes drift{to{translate:calc(100vw + 340px) 0}}
+
+.stage{position:relative;max-width:920px;margin:0 auto;padding:22px 16px 40px}
+.sign{display:inline-block;margin:6px 0 18px;padding:10px 34px 10px 22px;background:linear-gradient(#8aa0ad,#6f8795);border:4px solid var(--ink);border-radius:6px 28px 28px 6px;box-shadow:0 6px 0 var(--shadow)}
+.sign h1{margin:0;font:400 clamp(30px,6vw,46px)/1 "Pirata One",Georgia,serif;color:#f5e9e0;letter-spacing:.02em;text-shadow:0 3px 0 var(--red),0 5px 0 var(--ink)}
+.lead{margin:0 0 18px;color:#fff;max-width:46ch;text-shadow:0 2px 0 rgba(20,40,50,.4)}
+
+/* île : le panneau principal */
+.isle{position:relative;background:var(--grass);border:4px solid var(--ink);border-radius:8px;padding:14px;box-shadow:0 10px 0 var(--shadow);
+  background-image:radial-gradient(circle at 12% 20%,rgba(255,255,255,.08) 0 3px,transparent 4px),radial-gradient(circle at 70% 60%,rgba(0,0,0,.07) 0 3px,transparent 4px);background-size:34px 34px}
+.parch{background:var(--parch);border:4px solid var(--ink);border-radius:6px;padding:20px;box-shadow:inset 0 0 0 3px var(--parch2)}
+h2{margin:0 0 4px;font:400 28px/1.1 "Pirata One",Georgia,serif}
+.hint{margin:0 0 14px;color:var(--ink2);font-size:15px}
+.q{margin:22px 0 4px}
+
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;border:0;padding:0;margin:0}
+.role{position:relative;display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;padding:10px 12px;background:#fbf4dc;border:3px solid var(--ink);border-radius:5px;box-shadow:0 4px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.role:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--ink)}
+.role .e{font-size:24px;line-height:1}
+.role b{font-weight:600}
+.role small{color:var(--ink2);font-size:13px;line-height:1.25}
+.role[aria-checked="true"]{background:var(--gold);transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.role[aria-checked="true"] small{color:var(--ink)}
+
+.years{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.years output{min-width:96px;font:400 34px/1 "Pirata One",serif;color:var(--red)}
+input[type=range]{flex:1;min-width:180px;height:34px;accent-color:var(--red);cursor:grab}
+
+.peek{display:flex;align-items:center;gap:14px;margin-top:20px;padding:10px 14px;background:#fbf4dc;border:3px dashed var(--ink2);border-radius:5px;min-height:92px}
+.peek svg{width:54px;height:auto;flex:none}
+.peek .t{font:400 24px/1.1 "Pirata One",serif}
+.peek .n{color:var(--ink2);font-size:14px}
+
+.cta{display:inline-block;margin-top:18px;padding:12px 22px;background:var(--gold);border:3px solid var(--ink);border-radius:5px;box-shadow:0 5px 0 var(--ink);font-weight:600;font-size:18px;transition:transform .08s,box-shadow .08s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--ink)}
+.cta:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.ghost{background:#fbf4dc;font-size:16px;padding:9px 14px}
+
+/* échelle des rangs */
+.road{margin-top:16px;padding:12px 10px 8px;background:rgba(37,56,74,.88);border:4px solid var(--ink);border-radius:6px;overflow-x:auto}
+.road ol{display:flex;gap:6px;margin:0;padding:0 4px;list-style:none;min-width:max-content}
+.step{width:58px;text-align:center;color:#cdd8e0;font-size:12px;position:relative}
+.step svg{width:44px;height:auto;display:block;margin:0 auto 2px}
+.step.lock svg{filter:brightness(0) opacity(.4)}
+.step.cur svg{filter:drop-shadow(0 0 6px var(--gold)) drop-shadow(0 0 2px var(--gold));scale:1.2}
+.step.cur{color:var(--gold);font-weight:600}
+.step:not(:last-child)::after{content:"";position:absolute;top:30px;right:-8px;width:10px;height:4px;background:#5d7488}
+.step.done:not(:last-child)::after,.step.cur:not(:last-child)::after{background:var(--gold)}
+.road-cap{margin:0 0 6px 4px;color:#cdd8e0;font-size:13px}
+
+/* révélation : une seule séquence orchestrée */
+.reveal{display:none;text-align:center}
+.reveal.on{display:block}
+.reveal .crest{display:flex;justify-content:center}
+.reveal .crest svg{width:150px;height:auto;filter:drop-shadow(0 8px 0 rgba(20,40,50,.25))}
+.lvl{font-size:15px;color:var(--ink2);margin:6px 0 0}
+.rtitle{margin:2px 0 10px;font:400 clamp(34px,7vw,52px)/1 "Pirata One",Georgia,serif;color:var(--red);text-shadow:0 3px 0 rgba(37,56,74,.2)}
+.phrase{margin:0 auto 6px;max-width:34ch;font-size:19px;line-height:1.45}
+.next{margin:10px 0 0;color:var(--ink2);font-size:15px}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.reveal.play .crest svg{animation:stamp .7s cubic-bezier(.2,1.6,.4,1) both}
+.reveal.play::before{content:"";position:absolute;left:50%;top:92px;width:12px;height:12px;margin:-6px;border-radius:50%;border:4px solid var(--gold);animation:ring .9s .45s ease-out both;pointer-events:none}
+.reveal.play .lvl{animation:rise .4s .7s both}
+.reveal.play .rtitle{animation:rise .5s .95s both}
+.reveal.play .phrase{animation:rise .5s 1.4s both}
+.reveal.play .next,.reveal.play .actions{animation:rise .5s 1.9s both}
+.reveal.play ~ .road .step.done,.reveal.play ~ .road .step.cur{animation:pop .35s both;animation-delay:calc(var(--i)*70ms)}
+@keyframes stamp{from{scale:2.6;opacity:0;translate:0 -40px}to{scale:1;opacity:1;translate:0 0}}
+@keyframes ring{to{scale:22;opacity:0}}
+@keyframes rise{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@keyframes pop{from{opacity:.2;translate:0 8px}to{opacity:1;translate:0 0}}
+.reveal{position:relative}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));translate:-50% 20px;opacity:0;padding:10px 16px;background:var(--ink);color:#fff;border-radius:5px;border:3px solid var(--gold);transition:.25s;pointer-events:none}
+.toast.on{opacity:1;translate:-50% 0}
+.foot{margin:22px 0 0;color:#e8f4f2;font-size:13px;text-shadow:0 2px 0 rgba(20,40,50,.4)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}
+  .cloud{animation:none;left:10%}
+}
+</style>
+</head>
+<body>
+<div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+
+<main class="stage">
+  <div class="sign"><h1>Hustle Translator</h1></div>
+  <p class="lead">Dis-nous ce que tu codes et depuis quand. La guilde te dira qui tu es.</p>
+
+  <div class="isle">
+    <section class="parch" id="setup" aria-labelledby="h-setup">
+      <h2 id="h-setup">Entre dans la guilde</h2>
+      <p class="hint">Deux réponses, dix secondes. Ton rang s’affiche en direct.</p>
+
+      <p class="q" id="q-role"><b>Quelle est ta spécialité ?</b></p>
+      <div class="roles" id="roles" role="radiogroup" aria-labelledby="q-role"></div>
+
+      <p class="q" id="q-years"><b>Combien d’années d’expérience ?</b></p>
+      <div class="years">
+        <input id="years" type="range" min="0" max="25" step="1" value="3" aria-labelledby="q-years">
+        <output id="yout" for="years">3 ans</output>
+      </div>
+
+      <div class="peek" aria-live="polite">
+        <div id="peek-crest"></div>
+        <div><div class="t" id="peek-t"></div><div class="n" id="peek-n"></div></div>
+      </div>
+      <button class="cta" id="forge" type="button">Forger mon titre</button>
+    </section>
+
+    <section class="parch reveal" id="reveal" aria-live="polite">
+      <div class="crest" id="r-crest"></div>
+      <p class="lvl" id="r-lvl"></p>
+      <h2 class="rtitle" id="r-title"></h2>
+      <p class="phrase" id="r-phrase"></p>
+      <p class="next" id="r-next"></p>
+      <div class="actions">
+        <button class="cta" id="share" type="button">Partager mon titre</button>
+        <button class="cta ghost" id="reroll" type="button">Une autre devise</button>
+        <button class="cta ghost" id="again" type="button">Modifier</button>
+      </div>
+    </section>
+
+    <div class="road" aria-label="Échelle des rangs, du niveau 0 au niveau 10">
+      <p class="road-cap" id="road-cap"></p>
+      <ol id="road"></ol>
+    </div>
+  </div>
+  <p class="foot">Prototype visuel inspiré de l’univers « Tiny Swords » (Pixel Frog). Remplace les blasons SVG par les vrais sprites du pack, licence à vérifier sur la page itch.io.</p>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- Données ---------- */
+const ROLES=[
+ {id:'front',e:'🎨',n:'Frontend',g:'Bâtisseur de façades',ep:'des Façades',d:'les façades'},
+ {id:'back',e:'⚙️',n:'Backend',g:'Gardien des souterrains',ep:'des Souterrains',d:'les souterrains'},
+ {id:'full',e:'⚔️',n:'Fullstack',g:'Seigneur des deux royaumes',ep:'des Deux Royaumes',d:'les deux royaumes'},
+ {id:'ops',e:'🌉',n:'DevOps',g:'Maître des ponts-levis',ep:'des Ponts-Levis',d:'les ponts-levis'},
+ {id:'mob',e:'📯',n:'Mobile',g:'Messager du royaume',ep:'des Routes',d:'les routes du royaume'},
+ {id:'data',e:'⚗️',n:'Data / IA',g:'Alchimiste des grimoires',ep:'des Grimoires',d:'les grimoires'}
+];
+const R=[
+ {n:'Gueux',min:0,p:['Tout royaume commence par un premier commit. Tu regardes déjà vers {d}.','Les pieds dans la boue, les yeux sur {d} : c’est ainsi que naissent les légendes.']},
+ {n:'Page',min:1,p:['Tu portes les outils des anciens et tu apprends à lire {d}.','Chaque bug est un dragon miniature : tu en as déjà terrassé quelques-uns près de {d}.']},
+ {n:'Écuyer',min:2,p:['La guilde te confie ses premières quêtes sur {d}.','Ton armure n’est pas encore polie, mais {d} reconnaissent déjà ton blason.']},
+ {n:'Sergent d’armes',min:3,p:['Tu tiens la ligne quand la production tremble autour de {d}.','On t’appelle à l’aube, quand {d} vacillent. Et tu réponds toujours.']},
+ {n:'Chevalier',min:5,p:['Adoubé par la guilde : {d} te doivent plus d’un siège levé.','Ton épée s’appelle « refactor », et {d} en portent les cicatrices glorieuses.']},
+ {n:'Banneret',min:7,p:['Des recrues marchent sous ta bannière, et {d} suivent ton cap.','Tu ne te contentes plus de tenir {d} : tu apprends aux autres à les tenir.']},
+ {n:'Baron',min:9,p:['Un fief entier repose sur ton jugement, et {d} prospèrent sous ta main.','Les architectes viennent chercher ton avis avant de toucher à {d}.']},
+ {n:'Comte',min:12,p:['Tes choix de conception traversent les saisons : {d} s’en souviennent.','Sur {d}, ta parole fait loi, et rarement erreur.']},
+ {n:'Duc',min:15,p:['Peu de seigneurs ont vu autant de campagnes autour de {d}.','Les guildes voisines envoient des émissaires pour comprendre comment tu gouvernes {d}.']},
+ {n:'Connétable',min:18,p:['Tu commandes les armées de la guilde, et {d} dorment tranquilles.','Quand la crise gronde, c’est ton nom qu’on murmure sur {d}.']},
+ {n:'Souverain',min:22,p:['Tu ne règnes pas sur {d} : tu as écrit les lois qu’elles suivent.','Les chroniques de la guilde commencent avec toi, et {d} en sont la preuve.']}
+];
+const levelOf=y=>{let l=0;R.forEach((r,i)=>{if(y>=r.min)l=i});return l};
+
+/* ---------- Blasons SVG : métal = ancienneté, ornement = prestige ---------- */
+const METAL=['#9a7448','#9a7448','#9aa7b4','#9aa7b4','#cf8c4e','#cf8c4e','#e4e9ee','#e4e9ee','#f6c935','#f6c935','#f6c935'];
+const FIELD=['#3c6d96','#3c6d96','#3c6d96','#3c6d96','#b8404f','#b8404f','#b8404f','#b8404f','#6c3fa3','#6c3fa3','#6c3fa3'];
+const EMB=[
+ 'M40 38V76M30 38V52Q30 58 40 58Q50 58 50 52V38',
+ 'M40 36V76M30 47L40 36L50 47',
+ 'M40 34V68M31 62H49M40 68V77',
+ 'M30 36L50 74M50 36L30 74',
+ 'M30 36L50 74M50 36L30 74M26 66L35 58M54 66L45 58',
+ 'M30 74V46H34V40H38V46H42V40H46V46H50V74Z',
+ 'M32 36V78M32 38H54L47 46L54 54H32',
+ 'M27 74V44H53V74ZM36 74V61Q40 53 44 61V74',
+ 'M40 35L44 48L57 48L47 56L51 69L40 61L29 69L33 56L23 48L36 48Z',
+ 'M40 40a15 15 0 1 0 .01 0ZM40 48a7 7 0 1 0 .01 0Z',
+ 'M26 68L27 42L35 55L40 38L45 55L53 42L54 68Z'
+];
+function crest(l){
+  const m=METAL[l],f=FIELD[l];
+  let top='';
+  if(l>=4&&l<=6)top=`<path d="M26 16Q40 -10 54 16Z" fill="${m}" stroke="#25384a" stroke-width="3.5" stroke-linejoin="round"/>`;
+  if(l>=7&&l<=9)top=`<path d="M23 16L25 0L33 8L40 -3L47 8L55 0L57 16Z" fill="${m}" stroke="#25384a" stroke-width="3.5" stroke-linejoin="round"/>`;
+  if(l===10)top=`<path d="M17 16L19 -10L30 2L40 -16L50 2L61 -10L63 16Z" fill="${m}" stroke="#25384a" stroke-width="3.5" stroke-linejoin="round"/><circle cx="40" cy="1" r="3.5" fill="#b8404f"/>`;
+  const pips=l>0?Array.from({length:Math.min(l,5)},(_,i)=>`<rect x="${40-(Math.min(l,5)*7-3)/2+i*7}" y="82" width="4" height="4" fill="${m}"/>`).join(''):'';
+  return `<svg viewBox="0 -20 80 120" shape-rendering="crispEdges" aria-hidden="true">${top}
+  <path d="M10 18H70V54Q70 80 40 94Q10 80 10 54Z" fill="${f}" stroke="#25384a" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M15 23H65V54Q65 75 40 88Q15 75 15 54Z" fill="none" stroke="${m}" stroke-width="2.5"/>
+  <path d="${EMB[l]}" fill="${m}" stroke="${m}" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="round" transform="translate(0 -6)"/>${pips}</svg>`;
+}
+
+/* ---------- État & rendu ---------- */
+const $=id=>document.getElementById(id);
+const S={role:2,years:3,pi:0};
+const yl=y=>y+(y>1?' ans':' an');
+const title=(l,r)=>R[l].n+' '+ROLES[r].ep;
+
+function drawRoles(){
+  $('roles').innerHTML=ROLES.map((r,i)=>`<button type="button" class="role" role="radio" aria-checked="${i===S.role}" data-i="${i}"><span class="e" aria-hidden="true">${r.e}</span><b>${r.n}</b><small>${r.g}</small></button>`).join('');
+}
+function nextText(l,y){
+  if(l>=10)return 'Tu as atteint le sommet de la guilde.';
+  const need=R[l+1].min-y;
+  return `Prochain palier : ${R[l+1].n}, dans ${yl(need)}.`;
+}
+function drawRoad(cur){
+  $('road').innerHTML=R.map((r,i)=>`<li class="step ${i<cur?'done':i===cur?'cur':'lock'}" style="--i:${i}">${crest(i)}<span>${i}</span></li>`).join('');
+  $('road-cap').textContent=cur>=10?'Rang maximal atteint':`Tu es au niveau ${cur}. ${10-cur} rang${10-cur>1?'s':''} à conquérir.`;
+}
+function preview(){
+  const l=levelOf(S.years);
+  $('yout').textContent=yl(S.years);
+  $('peek-crest').innerHTML=crest(l);
+  $('peek-t').textContent=title(l,S.role);
+  $('peek-n').textContent=nextText(l,S.years);
+  drawRoad(l);
+}
+function phrase(){
+  const l=levelOf(S.years);
+  $('r-phrase').textContent=R[l].p[S.pi%2].replace('{d}',ROLES[S.role].d);
+}
+function forge(){
+  const l=levelOf(S.years);
+  S.pi=0;
+  $('r-crest').innerHTML=crest(l);
+  $('r-lvl').textContent=`Niveau ${l} sur 10 · ${yl(S.years)} d’expérience`;
+  $('r-title').textContent=title(l,S.role);
+  phrase();
+  $('r-next').textContent=nextText(l,S.years);
+  $('setup').style.display='none';
+  const rv=$('reveal');
+  rv.classList.remove('play');void rv.offsetWidth;
+  rv.classList.add('on','play');
+  drawRoad(l);
+  $('road').parentNode.parentNode.querySelector('.reveal').classList.add('play');
+  rv.scrollIntoView({block:'start',behavior:'smooth'});
+  $('r-title').setAttribute('tabindex','-1');$('r-title').focus({preventScroll:true});
+}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200)}
+
+$('roles').addEventListener('click',e=>{
+  const b=e.target.closest('.role');if(!b)return;
+  S.role=+b.dataset.i;drawRoles();preview();
+});
+$('roles').addEventListener('keydown',e=>{
+  if(!['ArrowRight','ArrowDown','ArrowLeft','ArrowUp'].includes(e.key))return;
+  e.preventDefault();
+  S.role=(S.role+(e.key==='ArrowRight'||e.key==='ArrowDown'?1:ROLES.length-1))%ROLES.length;
+  drawRoles();preview();$('roles').children[S.role].focus();
+});
+$('years').addEventListener('input',e=>{S.years=+e.target.value;preview()});
+$('forge').addEventListener('click',forge);
+$('reroll').addEventListener('click',()=>{S.pi++;phrase()});
+$('again').addEventListener('click',()=>{
+  $('reveal').classList.remove('on','play');$('setup').style.display='';preview();
+  $('setup').scrollIntoView({block:'start',behavior:'smooth'});
+});
+$('share').addEventListener('click',async()=>{
+  const l=levelOf(S.years);
+  const txt=`⚔️ Je suis ${title(l,S.role)} (niveau ${l}/10) dans la guilde des développeurs.\n« ${$('r-phrase').textContent} »\nEt toi, quel est ton rang ?`;
+  try{
+    if(navigator.share){await navigator.share({text:txt});return}
+    await navigator.clipboard.writeText(txt);toast('Titre copié. Colle-le où tu veux.');
+  }catch(err){toast('Copie impossible : sélectionne le texte à la main.')}
+});
+
+drawRoles();preview();
+</script>
+</body>
+</html>

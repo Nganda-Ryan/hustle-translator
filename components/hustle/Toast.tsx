@@ -1,0 +1,17 @@
+"use client";
+
+type Props = {
+  message: string | null;
+};
+
+export function Toast({ message }: Props) {
+  return (
+    <div
+      className={`toast${message ? " on" : ""}`}
+      role="status"
+      aria-live="polite"
+    >
+      {message ?? ""}
+    </div>
+  );
+}

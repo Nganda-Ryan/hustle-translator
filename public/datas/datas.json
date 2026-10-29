@@ -1,0 +1,790 @@
+{
+  "project": {
+    "id": "the-hustle-translator",
+    "name": "The Hustle Translator",
+    "version": "2.0.0",
+    "universe": "The Kingdom of Code",
+    "language": "fr",
+    "description": "Un registre royal qui transforme le rôle et l'expérience d'un développeur en un titre de noblesse numérique, un blason et une proclamation épique.",
+    "lore": {
+      "kingdom": "Le Royaume des Mille Algorithmes",
+      "guild": "La Guilde des Bâtisseurs du Code",
+      "royalOrder": "L'Ordre des Dix Insignes",
+      "intro": "En l'an de grâce numérique, lorsque les royaumes s'effondrent sous les erreurs de compilation et que les anciennes architectures menacent de sombrer dans l'oubli, une confrérie demeure. Ses membres manient la logique comme d'autres manient l'épée, gravent leurs serments dans des lignes de code et bâtissent des citadelles que le temps ne saurait aisément détruire. Mais nul ne reçoit de titre sans avoir parcouru un chemin. Présente-toi devant le Grand Registre, voyageur du numérique. Déclare ton art, révèle les années consacrées à sa maîtrise, et que la Guilde proclame le rang qui t'est dû.",
+      "closing": "Que ton code soit robuste, que tes déploiements soient victorieux et que tes nuits soient épargnées par les bugs de production."
+    },
+    "evaluation": {
+      "primaryFactor": "yearsOfExperience",
+      "secondaryFactor": "role",
+      "experienceUnit": "years",
+      "rounding": "floor",
+      "minExperience": 0,
+      "maxExperience": 80,
+      "rankingNote": "Les années déterminent le rang dans cette version ludique. Le rôle personnalise le titre, les exploits et la proclamation. L'ancienneté ne constitue pas à elle seule une mesure réelle de compétence."
+    }
+  },
+  "inputs": {
+    "role": {
+      "id": "role",
+      "label": "Quel art exerces-tu dans le royaume ?",
+      "placeholder": "Choisis ta spécialité...",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "frontend",
+          "label": "Frontend Developer",
+          "description": "Architecte des interfaces et gardien de l'expérience des utilisateurs."
+        },
+        {
+          "value": "backend",
+          "label": "Backend Developer",
+          "description": "Maître des mécanismes invisibles, des données et des rouages du royaume."
+        },
+        {
+          "value": "fullstack",
+          "label": "Fullstack Developer",
+          "description": "Bâtisseur capable d'unir les façades visibles aux fondations secrètes."
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile Developer",
+          "description": "Artisan des artefacts portatifs qui accompagnent les voyageurs partout."
+        },
+        {
+          "value": "devops",
+          "label": "DevOps Engineer",
+          "description": "Gardien des fortifications, des déploiements et des chemins menant à la production."
+        },
+        {
+          "value": "software_engineer",
+          "label": "Software Engineer",
+          "description": "Ingénieur des systèmes et bâtisseur de solutions durables."
+        },
+        {
+          "value": "data_engineer",
+          "label": "Data Engineer",
+          "description": "Gardien des fleuves de données et des archives du royaume."
+        },
+        {
+          "value": "ai_engineer",
+          "label": "AI Engineer",
+          "description": "Invocateur des intelligences artificielles et explorateur des frontières du savoir."
+        },
+        {
+          "value": "game_developer",
+          "label": "Game Developer",
+          "description": "Créateur de mondes, de quêtes et de mécaniques qui défient l'imagination."
+        },
+        {
+          "value": "qa_engineer",
+          "label": "QA Engineer",
+          "description": "Sentinelle qui éprouve les forteresses avant que leurs portes ne s'ouvrent au public."
+        },
+        {
+          "value": "security_engineer",
+          "label": "Security Engineer",
+          "description": "Protecteur des secrets, des accès et des trésors numériques."
+        },
+        {
+          "value": "tech_lead",
+          "label": "Tech Lead",
+          "description": "Commandant des compagnies techniques et arbitre des grandes décisions d'architecture."
+        },
+        {
+          "value": "other",
+          "label": "Autre spécialité",
+          "description": "Tout autre artisan qui consacre son esprit et ses mains à l'œuvre numérique."
+        }
+      ]
+    },
+    "yearsOfExperience": {
+      "id": "yearsOfExperience",
+      "label": "Combien d'années as-tu consacrées à cet art ?",
+      "placeholder": "Ex. : 5",
+      "type": "number",
+      "required": true,
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "helpText": "Compte les années d'expérience réelle en développement, et non le nombre de langages que tu as installés sur ton ordinateur."
+    }
+  },
+  "rankRules": {
+    "matching": "first_matching_range",
+    "minInclusive": true,
+    "maxInclusive": true,
+    "invalidInputMessage": "Le Grand Registre ne reconnaît pas cette durée. Présente un nombre entier compris entre 0 et 80.",
+    "unknownRoleFallback": "other",
+    "rankNotFoundMessage": "Le scribe royal n'a trouvé aucun rang correspondant à ton parcours."
+  },
+  "ranks": [
+    {
+      "level": 1,
+      "id": "squire-of-code",
+      "minYears": 0,
+      "maxYears": 0,
+      "tier": "initiation",
+      "prestige": 10,
+      "name": "Écuyer des Premières Lignes",
+      "shortTitle": "Écuyer du Code",
+      "ceremonialTitle": "Écuyer assermenté des Premières Lignes, apprenti de la Guilde et porteur de la Flamme naissante",
+      "englishTitle": "Squire of the First Lines",
+      "logo": {
+        "id": "squire",
+        "file": "/logos/level-01-squire.svg",
+        "alt": "Blason d'un écuyer représentant une plume d'argent sur un écu de bois, éclairée par une petite flamme.",
+        "symbol": "plume",
+        "description": "Un écu de bois sombre porte une plume d'argent au-dessus d'une flamme naissante. Le blason symbolise le commencement, la curiosité et le courage de celui qui ose écrire ses premières lignes."
+      },
+      "colors": {
+        "primary": "#76543B",
+        "secondary": "#C6A77B",
+        "accent": "#E6D7B8"
+      },
+      "insignia": [
+        "La Plume du Premier Serment",
+        "L'Écu de Bois",
+        "La Flamme de l'Apprentissage"
+      ],
+      "motto": "Omne opus a prima linea incipit.",
+      "mottoTranslation": "Toute œuvre commence par une première ligne.",
+      "ceremony": "Devant la Guilde réunie, le Grand Scribe dépose une plume sur ton écu encore vierge. Tu n'as pas encore conquis de province, ni défendu de citadelle contre les assauts de la production. Pourtant, tu as franchi le premier seuil : celui qui sépare le rêve de celui qui accepte de construire.",
+      "proclamation": "Oyez, oyez, gens du Royaume des Mille Algorithmes ! Que les cloches de la Guilde résonnent pour accueillir un nouvel aspirant aux arts du code ! Voici venir un Écuyer des Premières Lignes, celui qui se tient au seuil d'un vaste royaume dont les frontières restent à découvrir. Que les erreurs lui enseignent la patience, que les documentations lui révèlent leurs secrets et que chaque fonction écrite devienne une pierre posée dans les fondations de son avenir. Il ne possède peut-être pas encore l'épée des anciens maîtres, mais il détient déjà l'arme la plus précieuse de tout bâtisseur : la volonté d'apprendre. Que son voyage commence !",
+      "virtues": [
+        "Curiosité",
+        "Patience",
+        "Humilité",
+        "Persévérance"
+      ],
+      "achievements": [
+        "A franchi le seuil du développement logiciel.",
+        "Commence à apprendre à transformer une idée en instructions exécutables.",
+        "Découvre les premières lois de son environnement technique.",
+        "Pose les fondations d'une future maîtrise."
+      ],
+      "roleMessages": {
+        "frontend": "Tu apprends à donner un visage aux idées du royaume. Que tes interfaces deviennent les fenêtres par lesquelles le monde découvrira tes créations.",
+        "backend": "Tu commences à explorer les mécanismes qui font vivre les citadelles numériques. Que chaque requête comprise te rapproche des secrets enfouis sous leurs fondations.",
+        "fullstack": "Deux horizons s'ouvrent devant toi : celui des façades et celui des mécanismes cachés. Apprends à connaître leurs lois avant de prétendre les gouverner.",
+        "mobile": "Tu découvres l'art de faire tenir un monde dans la paume d'une main. Que tes premiers écrans guident les voyageurs vers de nouvelles aventures.",
+        "devops": "Tu poses tes premiers jalons sur les routes qui relient le développement à la production. Que les déploiements cessent bientôt d'être des terres inconnues.",
+        "software_engineer": "Tu apprends les premières lois de la construction logicielle. Que tes fondations soient solides avant que tes ambitions ne s'élèvent.",
+        "data_engineer": "Tu découvres les fleuves de données et les chemins qui les conduisent aux archives. Que ton savoir transforme bientôt le désordre en connaissance.",
+        "ai_engineer": "Tu te tiens au seuil des arts de l'intelligence artificielle. Étudie les grimoires, éprouve les modèles et distingue toujours la prouesse de l'illusion.",
+        "game_developer": "Tu découvres comment les mondes prennent forme et comment les règles donnent vie aux aventures. Que ton imagination trouve bientôt ses premiers royaumes.",
+        "qa_engineer": "Tu apprends à regarder là où les autres ne regardent pas encore. Que ton œil découvre les premières failles avant qu'elles ne deviennent des brèches.",
+        "security_engineer": "Tu commences à étudier les serrures et les secrets du royaume. Souviens-toi qu'une forteresse sûre commence par la compréhension de ses vulnérabilités.",
+        "tech_lead": "Tu découvres les responsabilités qui accompagnent les décisions techniques. Avant de conduire une compagnie, apprends à écouter, comprendre et servir ses bâtisseurs.",
+        "other": "Tu découvres les premiers secrets de ton art. Que chaque difficulté rencontrée aiguise ton esprit et renforce ta détermination."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "Le Registre reconnaît ton entrée dans la Guilde des Bâtisseurs du Code.",
+        "messageSuffix": "Garde ton écu près de toi : toute légende commence avant que le royaume ne connaisse ton nom."
+      }
+    },
+    {
+      "level": 2,
+      "id": "apprentice-of-the-guild",
+      "minYears": 1,
+      "maxYears": 1,
+      "tier": "apprenticeship",
+      "prestige": 20,
+      "name": "Apprenti assermenté de la Guilde",
+      "shortTitle": "Apprenti de la Guilde",
+      "ceremonialTitle": "Apprenti assermenté de la Guilde des Bâtisseurs, disciple des arts numériques et gardien de son premier serment",
+      "englishTitle": "Sworn Guild Apprentice",
+      "logo": {
+        "id": "apprentice",
+        "file": "/logos/level-02-apprentice.svg",
+        "alt": "Blason d'un marteau de forge croisé avec une plume sur un écu de bronze.",
+        "symbol": "marteau-et-plume",
+        "description": "Le marteau et la plume se croisent au centre d'un écu de bronze. L'apprenti ne se contente plus d'observer : il commence à façonner ses propres outils."
+      },
+      "colors": {
+        "primary": "#805A32",
+        "secondary": "#C48A45",
+        "accent": "#F0D5A0"
+      },
+      "insignia": [
+        "Le Marteau d'Apprentissage",
+        "La Plume de Bronze",
+        "Le Serment de la Guilde"
+      ],
+      "motto": "Discere est prima victoria.",
+      "mottoTranslation": "Apprendre est la première victoire.",
+      "ceremony": "Un an s'est écoulé depuis ton entrée dans les salles de la Guilde. Tu connais désormais quelques-uns de ses outils et tu as affronté tes premières énigmes. Le maître artisan te remet un marteau de bronze : non pour célébrer la perfection, mais pour reconnaître celui qui revient à l'ouvrage après chaque échec.",
+      "proclamation": "Par décret de la Guilde et devant les maîtres assemblés, qu'il soit proclamé que cet artisan a quitté le seuil des simples observateurs ! Voici l'Apprenti assermenté, celui qui a commencé à reconnaître les pièges de la syntaxe, les détours de la logique et les exigences d'un ouvrage bien construit. Que ses erreurs ne soient jamais une honte, mais les témoins de son apprentissage. Que ses outils s'affinent, que son jugement mûrisse et que son ambition ne devienne jamais plus grande que sa volonté de comprendre. Les portes du savoir s'ouvrent devant lui ; à lui de poursuivre la route.",
+      "virtues": [
+        "Discipline",
+        "Curiosité méthodique",
+        "Résilience",
+        "Sens de l'observation"
+      ],
+      "achievements": [
+        "A commencé à produire des solutions concrètes.",
+        "Apprend à rechercher, diagnostiquer et corriger des erreurs.",
+        "Se familiarise avec les outils essentiels de son métier.",
+        "Comprend progressivement que le code doit servir un objectif réel."
+      ],
+      "roleMessages": {
+        "frontend": "Tu apprends à dompter les composants et les styles. Que chaque interface que tu façonnes rapproche les habitants du royaume de leurs objectifs.",
+        "backend": "Tu commences à manier les requêtes, les données et les règles métier. Que tes mécanismes gagnent en fiabilité à mesure que ton savoir grandit.",
+        "fullstack": "Tu apprends à relier les deux faces d'un même ouvrage. Que chaque connexion entre interface et serveur t'enseigne l'art de la cohérence.",
+        "mobile": "Tu donnes progressivement forme aux outils qui voyagent avec leurs utilisateurs. Que tes applications deviennent plus utiles à chaque nouvelle version.",
+        "devops": "Tu commences à comprendre les rouages des environnements et des déploiements. Que chaque automatisation remplace bientôt une tâche répétitive.",
+        "software_engineer": "Tu passes de l'expérimentation à la construction. Que tes solutions soient compréhensibles autant qu'elles sont fonctionnelles.",
+        "data_engineer": "Tu apprends à préparer et transporter les données sans perdre leur sens. Que les archives du royaume deviennent plus ordonnées sous ta vigilance.",
+        "ai_engineer": "Tu commences à apprivoiser les modèles et les jeux de données. Que tes expériences reposent sur des résultats mesurables plutôt que sur de simples promesses.",
+        "game_developer": "Tu apprends à transformer les idées en mécaniques jouables. Que chaque prototype soit une nouvelle porte vers un monde meilleur.",
+        "qa_engineer": "Tu commences à éprouver les ouvrages avec méthode. Que tes tests deviennent des instruments de confiance plutôt que de simples formalités.",
+        "security_engineer": "Tu apprends à identifier les risques et à respecter les principes de défense. Que la prudence devienne ton premier réflexe.",
+        "tech_lead": "Tu apprends que guider exige davantage que savoir coder. Que l'écoute et la clarté préparent les décisions que tu prendras demain.",
+        "other": "Tu approfondis les fondations de ton métier. Que chaque problème résolu ajoute une nouvelle page au registre de tes apprentissages."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "La Guilde reconnaît tes premiers pas dans l'exercice de ton art.",
+        "messageSuffix": "Ne recherche pas encore la couronne : forge d'abord les compétences qui pourront la soutenir."
+      }
+    },
+    {
+      "level": 3,
+      "id": "artisan-of-code",
+      "minYears": 2,
+      "maxYears": 2,
+      "tier": "craftsmanship",
+      "prestige": 30,
+      "name": "Artisan juré des Œuvres numériques",
+      "shortTitle": "Artisan du Code",
+      "ceremonialTitle": "Artisan juré des Œuvres numériques, compagnon des ateliers royaux et façonneur de solutions éprouvées",
+      "englishTitle": "Sworn Artisan of Digital Works",
+      "logo": {
+        "id": "artisan",
+        "file": "/logos/level-03-artisan.svg",
+        "alt": "Blason portant un marteau d'argent et un engrenage sur un écu de fer.",
+        "symbol": "marteau-engrenage",
+        "description": "Un marteau d'argent frappe un engrenage au cœur d'un écu de fer. Il symbolise le passage de l'étude à la pratique et la capacité de produire des ouvrages utiles."
+      },
+      "colors": {
+        "primary": "#454F5B",
+        "secondary": "#A7B3C1",
+        "accent": "#DDE4EB"
+      },
+      "insignia": [
+        "Le Marteau d'Argent",
+        "L'Engrenage du Métier",
+        "Le Tablier des Artisans"
+      ],
+      "motto": "Ars per opus demonstratur.",
+      "mottoTranslation": "L'art se démontre par l'œuvre.",
+      "ceremony": "La Guilde te reconnaît désormais comme un compagnon des ateliers. Tu as commencé à transformer tes connaissances en réalisations. Le maître des forges t'accorde le marteau d'argent, signe que tes mains savent déjà produire des ouvrages qui dépassent le simple exercice d'école.",
+      "proclamation": "Que les ateliers ouvrent leurs portes et que les forges s'illuminent ! Un nouvel artisan se présente devant le Conseil des Bâtisseurs. Il a découvert que l'art du code ne consiste pas uniquement à faire fonctionner une machine, mais à lui donner une structure, une raison d'être et une utilité. Il apprend à reprendre ses ouvrages, à corriger leurs défauts et à écouter les exigences de ceux qui les utiliseront. Que son marteau frappe avec discernement, que ses fondations résistent à l'épreuve et que chaque projet achevé témoigne de son savoir grandissant. Le royaume a besoin de bâtisseurs qui livrent, non de rêveurs qui promettent.",
+      "virtues": [
+        "Soin du travail",
+        "Autonomie croissante",
+        "Pragmatisme",
+        "Fiabilité"
+      ],
+      "achievements": [
+        "Possède une première expérience concrète de réalisation.",
+        "Peut contribuer de façon autonome à des tâches délimitées.",
+        "Commence à structurer et améliorer ses solutions.",
+        "Découvre les compromis entre rapidité, qualité et maintenabilité."
+      ],
+      "roleMessages": {
+        "frontend": "Tu ne poses plus seulement des couleurs sur un écran : tu construis des parcours, structures les composants et donnes aux utilisateurs des chemins plus clairs.",
+        "backend": "Tu façonnes désormais les mécanismes qui soutiennent les applications. Que tes API, tes validations et tes règles métier deviennent des fondations dignes de confiance.",
+        "fullstack": "Tu relies les façades aux rouages intérieurs et commences à comprendre leurs interdépendances. Que tes applications forment un ensemble cohérent plutôt qu'une juxtaposition de pièces.",
+        "mobile": "Tu façonnes des expériences qui accompagnent les voyageurs dans leur quotidien. Que la simplicité de tes écrans cache la rigueur de ton travail.",
+        "devops": "Tu apprends à rendre les chemins de livraison plus prévisibles. Que tes environnements cessent d'être des territoires mystérieux.",
+        "software_engineer": "Tu commences à concevoir des solutions qui répondent à des besoins réels. Que la qualité de tes ouvrages se mesure à leur utilité et à leur durabilité.",
+        "data_engineer": "Tu structures les conduits qui transportent la connaissance. Que tes traitements préservent l'intégrité des données et servent ceux qui les exploitent.",
+        "ai_engineer": "Tu transformes tes expérimentations en prototypes concrets. Que tes modèles répondent à de véritables besoins et que leurs limites soient connues.",
+        "game_developer": "Tu donnes aux mondes leurs règles et aux mécaniques leur cohérence. Que tes créations deviennent des expériences que l'on prend plaisir à explorer.",
+        "qa_engineer": "Tu construis des stratégies de test plus fiables. Que les défauts soient découverts dans l'atelier plutôt qu'au milieu de la bataille.",
+        "security_engineer": "Tu contribues à fermer les premières brèches et à renforcer les accès. Que chaque protection soit réfléchie, vérifiable et proportionnée au risque.",
+        "tech_lead": "Tu commences à partager ton savoir et à aider d'autres bâtisseurs à avancer. Que tes conseils rendent l'équipe plus forte sans freiner son initiative.",
+        "other": "Tu passes de l'apprentissage à l'œuvre concrète. Que la qualité de tes réalisations parle plus fort que les promesses."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "Le Conseil des Bâtisseurs reconnaît ton passage de l'étude à la pratique.",
+        "messageSuffix": "La maîtrise ne naît pas d'un titre : elle se forge dans chaque ouvrage que tu améliores."
+      }
+    },
+    {
+      "level": 4,
+      "id": "knight-of-debugging",
+      "minYears": 3,
+      "maxYears": 4,
+      "tier": "proven-craft",
+      "prestige": 40,
+      "name": "Chevalier de la Lame et du Débogage",
+      "shortTitle": "Chevalier du Débogage",
+      "ceremonialTitle": "Chevalier assermenté de la Lame et du Débogage, défenseur des applications et protecteur des livraisons",
+      "englishTitle": "Knight of the Blade and Debugging",
+      "logo": {
+        "id": "knight",
+        "file": "/logos/level-04-knight.svg",
+        "alt": "Blason d'un heaume d'acier devant deux épées croisées, entouré d'une bordure rouge sombre.",
+        "symbol": "heaume-epees",
+        "description": "Un heaume d'acier se dresse devant deux épées croisées. La bordure rouge rappelle les incidents affrontés et la discipline nécessaire pour préserver les systèmes."
+      },
+      "colors": {
+        "primary": "#6B2430",
+        "secondary": "#B94A56",
+        "accent": "#E5C5C7"
+      },
+      "insignia": [
+        "La Lame du Débogage",
+        "Le Heaume de Production",
+        "L'Écu des Livraisons"
+      ],
+      "motto": "Per constantiam, victoria.",
+      "mottoTranslation": "Par la constance vient la victoire.",
+      "ceremony": "Après plusieurs campagnes dans les ateliers, tu reçois l'épée de la Guilde. Elle n'est pas destinée à frapper au hasard, mais à séparer méthodiquement le défaut de sa cause. Le Conseil reconnaît celui qui sait affronter un problème, examiner ses traces et rétablir l'ordre sans abandonner au premier revers.",
+      "proclamation": "Silence dans les rangs ! Que les trompettes annoncent l'arrivée d'un Chevalier de la Lame et du Débogage ! Cet artisan a traversé les premières batailles du développement. Il sait que le monstre qui se cache dans la production ne se vainc ni par la colère ni par les incantations, mais par l'observation, la méthode et la maîtrise des outils. Il connaît le poids d'une régression, la valeur d'un test et le prix d'une correction précipitée. Que son épée demeure précise, que son jugement reste calme sous la pression et que ses livraisons apportent la paix aux contrées qu'elles desservent. Par son travail, la Guilde gagne un défenseur de ses ouvrages !",
+      "virtues": [
+        "Sang-froid",
+        "Responsabilité",
+        "Diagnostic méthodique",
+        "Sens de la qualité"
+      ],
+      "achievements": [
+        "A acquis plusieurs années d'expérience professionnelle.",
+        "Peut prendre en charge des fonctionnalités avec une autonomie croissante.",
+        "Sait diagnostiquer des erreurs et corriger des défauts complexes pour son niveau.",
+        "Commence à anticiper les effets de bord et les régressions."
+      ],
+      "roleMessages": {
+        "frontend": "Tu défends l'expérience des utilisateurs contre les interfaces fragiles et les parcours brisés. Que chaque détail serve la clarté, la rapidité et la confiance.",
+        "backend": "Tu protèges les mécanismes qui soutiennent les applications. Que tes contrats d'API, tes traitements et tes contrôles tiennent bon lorsque la charge augmente.",
+        "fullstack": "Tu sais désormais poursuivre un problème à travers plusieurs couches de l'application. Que ta lame découvre les causes profondes plutôt que de masquer les symptômes.",
+        "mobile": "Tu défends les applications contre les crashs, les lenteurs et les mauvaises surprises. Que tes créations demeurent fiables entre les mains de leurs utilisateurs.",
+        "devops": "Tu veilles sur les déploiements et les systèmes lorsque la pression monte. Que les incidents trouvent en toi un adversaire méthodique.",
+        "software_engineer": "Tu affrontes les défauts avec méthode et apprends à privilégier les corrections durables. Que tes solutions résistent à plus d'une bataille.",
+        "data_engineer": "Tu défends l'intégrité des pipelines et la fiabilité des traitements. Que les données arrivent à destination sans perdre leur sens ni leur provenance.",
+        "ai_engineer": "Tu mets les modèles à l'épreuve et confrontes leurs résultats aux faits. Que tes évaluations démasquent les faiblesses avant qu'elles ne se transforment en déceptions.",
+        "game_developer": "Tu combats les bugs qui brisent l'immersion et les mécaniques qui trahissent le joueur. Que chaque correction rapproche ton monde de la vision de ses créateurs.",
+        "qa_engineer": "Tu deviens un rempart contre les régressions et les défauts silencieux. Que tes scénarios de test révèlent les failles avant l'ouverture des portes.",
+        "security_engineer": "Tu examines les vulnérabilités et renforces les défenses avec discernement. Que tes interventions réduisent les risques sans compromettre inutilement les usages.",
+        "tech_lead": "Tu aides l'équipe à garder son calme devant les incidents. Que tes décisions rétablissent la confiance et transforment chaque crise en apprentissage collectif.",
+        "other": "Tu affrontes les problèmes avec méthode et persévérance. Que ton expérience grandissante fasse de toi un défenseur fiable de ton domaine."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "La Guilde t'accorde le droit de porter l'épée de la résolution des problèmes.",
+        "messageSuffix": "Le véritable chevalier ne prétend pas n'avoir jamais échoué : il sait comment se relever et réparer."
+      }
+    },
+    {
+      "level": 5,
+      "id": "guild-master",
+      "minYears": 5,
+      "maxYears": 6,
+      "tier": "mastery",
+      "prestige": 50,
+      "name": "Maître de la Grande Guilde des Bâtisseurs",
+      "shortTitle": "Maître de la Guilde",
+      "ceremonialTitle": "Maître de la Grande Guilde des Bâtisseurs du Code, gardien des savoirs et arbitre des ouvrages difficiles",
+      "englishTitle": "Grand Guild Master of Code",
+      "logo": {
+        "id": "guild-master",
+        "file": "/logos/level-05-guild-master.svg",
+        "alt": "Blason bleu nuit avec un engrenage doré, une couronne de laurier et une étoile centrale.",
+        "symbol": "engrenage-laurier",
+        "description": "Un engrenage doré entouré de lauriers se dresse sur un écu bleu nuit. Il représente la maîtrise du métier, le jugement et la transmission du savoir."
+      },
+      "colors": {
+        "primary": "#18294A",
+        "secondary": "#C5A45B",
+        "accent": "#F0DFA9"
+      },
+      "insignia": [
+        "Le Sceau de la Guilde",
+        "Les Lauriers du Métier",
+        "La Clef des Ateliers"
+      ],
+      "motto": "Non solum facere, sed bene facere.",
+      "mottoTranslation": "Ne pas seulement faire, mais bien faire.",
+      "ceremony": "Le Conseil des maîtres t'invite au siège de la Guilde. Devant les anciens registres, tu reçois le sceau des bâtisseurs. Tu n'es plus seulement appelé à produire : tu dois savoir choisir, expliquer, améliorer et transmettre. La Guilde reconnaît en toi un artisan confirmé, capable d'affronter des problèmes substantiels et de contribuer à la qualité collective des ouvrages.",
+      "proclamation": "Que les portes de la Grande Guilde s'ouvrent ! Qu'on apporte le sceau d'or et que les maîtres prennent place autour du Conseil ! Voici un bâtisseur qui a consacré plusieurs années à l'art de concevoir, de corriger et de livrer. Il sait que le code n'est pas une collection de prouesses isolées, mais un ouvrage appelé à être compris, maintenu et transmis. Ses décisions commencent à porter la marque de l'expérience ; ses choix peuvent épargner à ses compagnons bien des détours. Par la présente proclamation, la Guilde l'élève au rang de Maître. Qu'il protège la qualité sans étouffer l'innovation, qu'il transmette son savoir sans orgueil et qu'il bâtisse des systèmes dignes de ceux qui viendront après lui !",
+      "virtues": [
+        "Maîtrise technique",
+        "Transmission",
+        "Jugement",
+        "Responsabilité collective"
+      ],
+      "achievements": [
+        "Possède une expérience professionnelle confirmée.",
+        "Peut concevoir et livrer des fonctionnalités substantielles.",
+        "Contribue à la qualité des pratiques, des tests et de la maintenance.",
+        "Peut accompagner des collègues et expliquer ses choix techniques."
+      ],
+      "roleMessages": {
+        "frontend": "Tu sais désormais que l'interface est un pacte entre le produit et ses utilisateurs. Que tes choix d'accessibilité, de performance et d'architecture honorent ce pacte.",
+        "backend": "Tu es devenu l'un des gardiens des règles métier et des mécanismes de confiance. Que tes services soient aussi compréhensibles et maintenables que robustes.",
+        "fullstack": "Tu sais relier les besoins du produit aux réalités du système. Que ton regard transversal empêche les frontières techniques de devenir des murs.",
+        "mobile": "Tu maîtrises mieux les contraintes des appareils et des usages réels. Que tes applications unissent fluidité, sobriété et fiabilité.",
+        "devops": "Tu contribues à bâtir une chaîne de livraison digne de confiance. Que l'automatisation, l'observabilité et la reproductibilité deviennent les piliers de tes fortifications.",
+        "software_engineer": "Tu sais désormais mesurer la qualité au-delà de la seule réussite d'une compilation. Que tes systèmes soient durables, explicables et adaptés à leurs véritables contraintes.",
+        "data_engineer": "Tu veilles à ce que les données soient exploitables, traçables et fiables. Que les fondations de l'analyse reposent sur des pipelines dont la qualité ne laisse rien au hasard.",
+        "ai_engineer": "Tu sais relier les modèles aux besoins réels et à leurs contraintes opérationnelles. Que l'évaluation, la sécurité et le coût guident tes décisions autant que la performance.",
+        "game_developer": "Tu comprends mieux l'équilibre entre ambition créative, performance et expérience de jeu. Que tes mondes deviennent plus riches sans sacrifier leur solidité.",
+        "qa_engineer": "Tu contribues à instaurer une véritable culture de qualité. Que tes stratégies de test protègent le produit sans ralentir inutilement ceux qui le construisent.",
+        "security_engineer": "Tu participes à intégrer la sécurité dans les décisions et les pratiques quotidiennes. Que la défense du royaume devienne une responsabilité partagée.",
+        "tech_lead": "Tu commences à faire grandir la capacité de toute une compagnie. Que ton autorité repose sur la clarté, l'exemplarité et la confiance que tu inspires.",
+        "other": "Ton expérience te permet d'aborder des problèmes plus exigeants et de transmettre des pratiques solides. Que ton savoir profite à l'ensemble de la Guilde."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "Le Conseil reconnaît ta contribution à la solidité des ouvrages de la Guilde.",
+        "messageSuffix": "Le maître véritable ne garde pas tous les secrets : il rend les autres capables de bâtir à leur tour."
+      }
+    },
+    {
+      "level": 6,
+      "id": "baron-of-architecture",
+      "minYears": 7,
+      "maxYears": 9,
+      "tier": "architecture",
+      "prestige": 60,
+      "name": "Baron des Architectures Éternelles",
+      "shortTitle": "Baron des Architectures",
+      "ceremonialTitle": "Baron des Architectures Éternelles, seigneur des fondations logicielles et protecteur des citadelles numériques",
+      "englishTitle": "Baron of Eternal Architectures",
+      "logo": {
+        "id": "baron",
+        "file": "/logos/level-06-baron.svg",
+        "alt": "Blason d'une forteresse de pierre surmontée d'un compas doré, sur fond bleu profond.",
+        "symbol": "forteresse-compas",
+        "description": "Une forteresse à trois tours est surmontée d'un compas d'or. Les pierres symbolisent la stabilité ; le compas, la capacité à penser l'ensemble avant d'en ériger les parties."
+      },
+      "colors": {
+        "primary": "#172E50",
+        "secondary": "#7896B7",
+        "accent": "#D5BC83"
+      },
+      "insignia": [
+        "Le Compas des Architectes",
+        "La Clef des Forteresses",
+        "Le Sceau des Fondations"
+      ],
+      "motto": "Fundamenta firma, regna firma.",
+      "mottoTranslation": "Fondations solides, royaumes solides.",
+      "ceremony": "Le Conseil te confie le compas des architectes, instrument des bâtisseurs qui regardent au-delà de la prochaine pierre. Tu es appelé à considérer les dépendances, les contraintes, les coûts de maintenance et les conséquences des décisions d'aujourd'hui sur les ouvrages de demain. Le titre de baron symbolise cette responsabilité grandissante : concevoir des fondations capables d'évoluer sans que chaque changement menace l'ensemble.",
+      "proclamation": "Qu'on fasse silence dans les salles du Conseil ! Devant nous se tient un Baron des Architectures Éternelles, un bâtisseur qui sait qu'une citadelle ne se juge pas à la hauteur de ses tours, mais à la solidité de ses fondations. Il examine les chemins que suivront les données, les liens qui unissent les services et les conséquences que chaque décision peut imposer aux générations futures de mainteneurs. Il ne bâtit pas pour impressionner la cour : il bâtit pour que le royaume puisse grandir sans s'effondrer sous son propre poids. Que son compas demeure juste, que ses plans restent lisibles et que ses forteresses résistent aux assauts du changement. Par son jugement, les fondations du royaume gagnent en force !",
+      "virtues": [
+        "Vision systémique",
+        "Anticipation",
+        "Maîtrise des compromis",
+        "Pensée à long terme"
+      ],
+      "achievements": [
+        "Peut contribuer à des choix d'architecture structurants.",
+        "Comprend mieux les compromis entre coût, performance et maintenabilité.",
+        "Anticipe les dépendances et les conséquences de changements importants.",
+        "Participe à faire évoluer des systèmes existants sans perdre de vue leurs contraintes."
+      ],
+      "roleMessages": {
+        "frontend": "Tu dessines des architectures d'interface qui peuvent grandir sans devenir des labyrinthes. Que tes systèmes de composants servent l'évolution du produit et non les caprices de la complexité.",
+        "backend": "Tu conçois les fondations invisibles sur lesquelles reposent les services du royaume. Que tes contrats, tes frontières et tes stratégies de résilience supportent la croissance.",
+        "fullstack": "Tu vois désormais les conséquences des décisions d'une extrémité à l'autre du système. Que tes architectures relient les couches sans créer de dépendances qui emprisonnent l'avenir.",
+        "mobile": "Tu conçois des applications capables de composer avec les réseaux incertains, les appareils variés et les ressources limitées. Que tes choix d'architecture servent la fiabilité sur le terrain.",
+        "devops": "Tu façonnes les routes, les remparts et les mécanismes qui soutiennent les livraisons. Que tes plateformes puissent grandir sans sacrifier leur observabilité ni leur sécurité.",
+        "software_engineer": "Tu abordes les systèmes comme des ensembles vivants dont chaque décision possède un coût. Que tes architectures soient adaptées aux besoins présents et préparées aux évolutions raisonnables.",
+        "data_engineer": "Tu dessines les grands axes par lesquels circulent les données. Que tes pipelines, tes contrats et tes mécanismes de gouvernance forment un réseau fiable et évolutif.",
+        "ai_engineer": "Tu structures les systèmes qui relient données, modèles et applications. Que tes architectures rendent l'évaluation, la surveillance et le remplacement des modèles possibles sans tout reconstruire.",
+        "game_developer": "Tu conçois les fondations qui permettent aux mondes de s'étendre. Que tes systèmes de gameplay, de contenu et de performance soutiennent l'ambition créative sans s'effondrer sous sa charge.",
+        "qa_engineer": "Tu bâtis des stratégies de validation à l'échelle du système. Que la qualité soit pensée dès les fondations plutôt qu'ajoutée comme un rempart de dernière minute.",
+        "security_engineer": "Tu intègres les menaces dans les plans avant que les murailles ne soient élevées. Que la défense soit une propriété de l'architecture et non une réparation tardive.",
+        "tech_lead": "Tu aides les équipes à prendre des décisions qui résistent au temps. Que tes arbitrages soient documentés, compréhensibles et proportionnés aux risques du royaume.",
+        "other": "Tu commences à penser au-delà de la tâche isolée. Que tes choix structurants rendent ton domaine plus fiable, plus cohérent et plus apte à évoluer."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "La Guilde te confie la responsabilité symbolique des fondations et des grands plans.",
+        "messageSuffix": "Une architecture remarquable n'est pas celle qui prévoit tout : c'est celle qui permet de changer sans tout briser."
+      }
+    },
+    {
+      "level": 7,
+      "id": "count-of-systems",
+      "minYears": 10,
+      "maxYears": 12,
+      "tier": "high-council",
+      "prestige": 70,
+      "name": "Comte des Grands Systèmes",
+      "shortTitle": "Comte des Systèmes",
+      "ceremonialTitle": "Comte des Grands Systèmes, gardien des équilibres du royaume et conseiller des bâtisseurs de haut rang",
+      "englishTitle": "Count of the Great Systems",
+      "logo": {
+        "id": "count",
+        "file": "/logos/level-07-count.svg",
+        "alt": "Blason pourpre portant trois tours d'argent et une couronne comtale sertie de pierres.",
+        "symbol": "trois-tours-couronne",
+        "description": "Trois tours d'argent s'élèvent sous une couronne comtale. Elles représentent les systèmes interconnectés, les décisions de grande portée et la responsabilité de préserver leur équilibre."
+      },
+      "colors": {
+        "primary": "#48285E",
+        "secondary": "#A88AC0",
+        "accent": "#E6D5F0"
+      },
+      "insignia": [
+        "La Couronne des Trois Tours",
+        "Le Sceau des Systèmes",
+        "Le Registre des Décisions"
+      ],
+      "motto": "Ordo ex ratione, robur ex sapientia.",
+      "mottoTranslation": "De la raison naît l'ordre, de la sagesse naît la force.",
+      "ceremony": "Le Conseil supérieur t'appelle à siéger parmi ceux qui considèrent plusieurs ouvrages à la fois. Les décisions que tu contribues à prendre peuvent désormais influencer les équipes, les services et les orientations techniques d'un domaine entier. Le titre de comte honore une expérience étendue et une compréhension plus profonde des interactions entre les systèmes, les personnes et les contraintes du royaume.",
+      "proclamation": "Que les bannières des provinces se lèvent et que les cloches des citadelles répondent à l'appel ! Voici un Comte des Grands Systèmes, un bâtisseur qui a vu les architectures croître, les technologies changer et les solutions jadis brillantes révéler leurs limites. Il sait que le pouvoir d'un système ne réside pas dans sa complexité, mais dans sa capacité à servir durablement ceux qui en dépendent. Il comprend que la décision d'un atelier peut affecter tout un réseau de provinces. Qu'il gouverne les interdépendances avec discernement, qu'il préfère la clarté à l'apparat et qu'il garde le royaume de la tentation de bâtir sans nécessité. Que sa sagesse maintienne l'équilibre entre ambition et raison !",
+      "virtues": [
+        "Vision globale",
+        "Lucidité",
+        "Capacité d'arbitrage",
+        "Transmission d'expérience"
+      ],
+      "achievements": [
+        "Dispose d'une expérience étendue de systèmes et de projets.",
+        "Peut éclairer des décisions techniques ayant des conséquences transversales.",
+        "Comprend les coûts durables des choix d'architecture et d'exploitation.",
+        "Peut accompagner plusieurs contributeurs vers des solutions plus cohérentes."
+      ],
+      "roleMessages": {
+        "frontend": "Tu considères l'expérience numérique comme un système complet : accessibilité, performance, cohérence visuelle et maintenabilité. Que chaque décision améliore le royaume sans multiplier les artifices.",
+        "backend": "Tu comprends les liens entre les services, les données, la disponibilité et les besoins métier. Que tes décisions renforcent la cohérence de l'ensemble plutôt que la gloire d'un composant isolé.",
+        "fullstack": "Tu sais lire les tensions entre produit, interface, API, données et exploitation. Que ta vision d'ensemble rapproche les équipes et empêche les silos de gouverner le royaume.",
+        "mobile": "Tu sais que l'application ne s'arrête pas à l'écran : elle dépend des services, des réseaux, des appareils et des usages. Que tes décisions préservent cet équilibre.",
+        "devops": "Tu comprends comment les chaînes de livraison, la fiabilité et l'observabilité influencent l'ensemble du royaume. Que tes plateformes soutiennent les équipes au lieu de leur imposer de nouveaux labyrinthes.",
+        "software_engineer": "Tu peux considérer un système dans la durée, avec ses utilisateurs, ses coûts et ses risques. Que ta vision globale guide des décisions plus utiles que spectaculaires.",
+        "data_engineer": "Tu relies la qualité des données à la confiance des décisions qui en dépendent. Que la gouvernance, la traçabilité et la fiabilité demeurent les piliers des archives du royaume.",
+        "ai_engineer": "Tu sais que les systèmes d'IA dépendent autant des données, de l'évaluation et de l'exploitation que des modèles eux-mêmes. Que tes choix maintiennent ces forces en équilibre.",
+        "game_developer": "Tu considères l'expérience de jeu dans son ensemble : mécaniques, contenu, outils, performances et attentes des joueurs. Que la cohérence du monde l'emporte sur l'accumulation de fonctionnalités.",
+        "qa_engineer": "Tu sais que la qualité résulte de l'interaction entre les personnes, les pratiques et les systèmes. Que tes stratégies réduisent les risques sans enfermer les équipes dans des rituels inutiles.",
+        "security_engineer": "Tu considères les risques à l'échelle du royaume et non d'une seule porte. Que tes priorités protègent les actifs essentiels et rendent les arbitrages compréhensibles.",
+        "tech_lead": "Tu aides plusieurs bâtisseurs à avancer dans une direction commune. Que ta capacité d'arbitrage transforme les désaccords techniques en décisions assumées.",
+        "other": "Ton expérience te permet d'observer les interactions au-delà de ton périmètre immédiat. Que ta vision systémique aide le royaume à mieux choisir ses prochaines constructions."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "Le Conseil supérieur reconnaît ta capacité à considérer les systèmes dans leur ensemble.",
+        "messageSuffix": "La sagesse d'un bâtisseur se mesure aussi aux problèmes qu'il empêche de naître."
+      }
+    },
+    {
+      "level": 8,
+      "id": "duke-of-technology",
+      "minYears": 13,
+      "maxYears": 15,
+      "tier": "grand-nobility",
+      "prestige": 80,
+      "name": "Duc des Hautes Technologies",
+      "shortTitle": "Duc des Technologies",
+      "ceremonialTitle": "Duc des Hautes Technologies, grand protecteur des citadelles numériques et conseiller des souverains du produit",
+      "englishTitle": "Duke of High Technologies",
+      "logo": {
+        "id": "duke",
+        "file": "/logos/level-08-duke.svg",
+        "alt": "Blason bleu royal portant une couronne ducale, un château d'or et deux étoiles.",
+        "symbol": "couronne-ducale-chateau",
+        "description": "Une couronne ducale surmonte un château d'or encadré de deux étoiles. Le blason évoque une influence technique étendue et la capacité à relier les décisions aux ambitions du royaume."
+      },
+      "colors": {
+        "primary": "#143B73",
+        "secondary": "#4D82C4",
+        "accent": "#E4C879"
+      },
+      "insignia": [
+        "La Couronne Ducale",
+        "Le Sceau des Hautes Technologies",
+        "Les Clefs des Citadelles"
+      ],
+      "motto": "Consilium ante potentiam.",
+      "mottoTranslation": "Le discernement avant la puissance.",
+      "ceremony": "Le souverain du royaume t'invite à son conseil. Tu reçois le sceau ducal, symbole d'une influence qui peut dépasser un seul système ou une seule équipe. À ce rang, la puissance technique n'est plus une fin : elle doit répondre à une stratégie, soutenir des personnes et produire une valeur durable. Le duc est celui qui sait aussi renoncer à une technologie séduisante lorsque le royaume n'en a pas besoin.",
+      "proclamation": "Que les portes du palais s'ouvrent devant le Conseil des Hauts Bâtisseurs ! Nous accueillons un Duc des Hautes Technologies, dont l'expérience embrasse les évolutions, les compromis et les conséquences de décisions prises à grande échelle. Il sait qu'une technologie n'est pas grande parce qu'elle est nouvelle, mais parce qu'elle résout le bon problème avec justesse. Il sait qu'une équipe peut se perdre dans la sophistication, qu'un système peut devenir prisonnier de ses propres ambitions et qu'un royaume prospère grâce à la qualité de ses décisions autant qu'à la force de ses ouvrages. Qu'il conseille sans arrogance, qu'il innove sans aveuglement et qu'il protège l'avenir sans mépriser les réalités du présent. La Guilde reconnaît en lui un grand seigneur de l'art numérique !",
+      "virtues": [
+        "Vision stratégique",
+        "Pragmatisme supérieur",
+        "Influence constructive",
+        "Maîtrise des compromis"
+      ],
+      "achievements": [
+        "Possède une expérience longue de l'évolution des systèmes.",
+        "Peut contribuer à des orientations techniques de grande portée.",
+        "Sait mettre en balance innovation, valeur métier, risques et coûts.",
+        "Peut influencer les pratiques et les décisions au-delà de sa propre contribution individuelle."
+      ],
+      "roleMessages": {
+        "frontend": "Tu sais que l'expérience numérique est un avantage stratégique, non un simple ornement. Que tes décisions unissent excellence d'interface, accessibilité et objectifs du produit.",
+        "backend": "Tu comprends que les fondations techniques influencent la capacité du royaume à évoluer. Que tes arbitrages préservent la fiabilité tout en ouvrant des chemins vers l'avenir.",
+        "fullstack": "Tu peux rapprocher les préoccupations du produit, de l'expérience utilisateur et de l'infrastructure. Que ta vision transversale transforme les frontières techniques en points de coopération.",
+        "mobile": "Tu sais que les usages mobiles s'inscrivent dans un écosystème plus vaste. Que tes décisions fassent de la mobilité une force durable plutôt qu'une contrainte oubliée.",
+        "devops": "Tu aides le royaume à livrer plus sûrement et à exploiter ses systèmes avec davantage de maîtrise. Que tes choix de plateforme servent la stratégie sans créer de dépendance inutile.",
+        "software_engineer": "Tu peux éclairer des choix qui engagent le système pour plusieurs années. Que ta sagesse distingue les investissements utiles des constructions séduisantes mais superflues.",
+        "data_engineer": "Tu relies les infrastructures de données aux ambitions du royaume. Que les décisions de stockage, de circulation et de gouvernance rendent la connaissance plus fiable et accessible.",
+        "ai_engineer": "Tu sais inscrire l'intelligence artificielle dans une stratégie réaliste. Que la valeur démontrée, la gouvernance et la maîtrise des risques précèdent les proclamations de magie.",
+        "game_developer": "Tu sais équilibrer ambition créative, contraintes techniques et viabilité du produit. Que tes décisions permettent aux équipes de créer des mondes mémorables sans perdre le contrôle de leurs fondations.",
+        "qa_engineer": "Tu contribues à faire de la qualité un avantage durable du royaume. Que tes stratégies protègent la confiance des utilisateurs tout en soutenant la vitesse d'évolution.",
+        "security_engineer": "Tu aides les dirigeants à comprendre les risques et à investir dans les défenses essentielles. Que la sécurité protège les ambitions du royaume au lieu de devenir une simple formalité.",
+        "tech_lead": "Tu peux relier les décisions techniques aux priorités du produit et aux capacités des équipes. Que ton influence donne une direction claire sans étouffer l'initiative.",
+        "other": "Ton expérience te permet de relier expertise, stratégie et résultats. Que tes décisions servent durablement les ambitions du royaume."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "La couronne reconnaît ton influence grandissante sur les orientations du royaume.",
+        "messageSuffix": "La grandeur ne consiste pas à utiliser la technologie la plus puissante, mais à choisir celle dont le royaume a réellement besoin."
+      }
+    },
+    {
+      "level": 9,
+      "id": "prince-of-architects",
+      "minYears": 16,
+      "maxYears": 19,
+      "tier": "royal-council",
+      "prestige": 90,
+      "name": "Prince héritier des Grands Architectes",
+      "shortTitle": "Prince des Architectes",
+      "ceremonialTitle": "Prince héritier des Grands Architectes, premier conseiller des bâtisseurs et gardien de l'héritage technique du royaume",
+      "englishTitle": "Crown Prince of the Great Architects",
+      "logo": {
+        "id": "prince",
+        "file": "/logos/level-09-prince.svg",
+        "alt": "Blason royal pourpre et or portant une couronne princière, un château à cinq tours et un sceptre.",
+        "symbol": "couronne-princiere-sceptre",
+        "description": "Une couronne princière et un sceptre encadrent un château à cinq tours. Le blason symbolise la sagesse accumulée, la responsabilité de transmettre et l'influence sur les grandes orientations."
+      },
+      "colors": {
+        "primary": "#54265F",
+        "secondary": "#B58AC8",
+        "accent": "#F2D47B"
+      },
+      "insignia": [
+        "Le Sceptre des Architectes",
+        "La Couronne Princière",
+        "Le Livre des Héritages"
+      ],
+      "motto": "Sapientia ducit, opus manet.",
+      "mottoTranslation": "La sagesse guide, l'œuvre demeure.",
+      "ceremony": "Dans la salle des cartes et des chroniques, le Conseil te remet le sceptre des grands architectes. Il représente moins un pouvoir qu'un devoir : préserver ce qui fonctionne, transformer ce qui doit l'être et transmettre les connaissances qui permettront au royaume de poursuivre son essor. Le titre princier distingue les figures les plus expérimentées de la Guilde dans cette hiérarchie symbolique.",
+      "proclamation": "Que les chroniques anciennes soient ouvertes et que les noms des grands bâtisseurs soient lus devant la cour ! Voici le Prince héritier des Grands Architectes, un artisan dont la longue traversée du royaume lui a enseigné la valeur du temps, la fragilité des certitudes et la nécessité de transmettre. Il a vu des modes techniques naître, des promesses s'éteindre et des systèmes survivre grâce à la sagesse de ceux qui les ont conçus. Sa mission n'est plus seulement de résoudre l'énigme présente, mais d'aider le royaume à poser les bonnes questions pour demain. Qu'il transmette ses connaissances sans les transformer en dogmes, qu'il guide les jeunes bâtisseurs sans leur voler leurs découvertes et qu'il défende une excellence accessible à ceux qui construiront après lui. La Guilde inscrit son nom parmi ses plus hauts dignitaires !",
+      "virtues": [
+        "Sagesse technique",
+        "Transmission du savoir",
+        "Vision à long terme",
+        "Exigence sans dogmatisme"
+      ],
+      "achievements": [
+        "Dispose d'une expérience professionnelle particulièrement étendue.",
+        "Peut contribuer à orienter des systèmes et des pratiques sur le long terme.",
+        "Possède un recul important sur les compromis techniques et les évolutions technologiques.",
+        "Peut transmettre une expérience précieuse et aider d'autres bâtisseurs à développer leur jugement."
+      ],
+      "roleMessages": {
+        "frontend": "Tu sais que les interfaces les plus durables sont celles qui survivent aux changements de besoins, d'équipes et de technologies. Que ton héritage soit une expérience plus accessible, plus claire et plus humaine.",
+        "backend": "Tu comprends comment les décisions invisibles d'aujourd'hui deviennent les contraintes de demain. Que tes systèmes transmettent la stabilité sans empêcher les générations futures d'innover.",
+        "fullstack": "Tu peux embrasser l'ensemble de la chaîne de valeur numérique et en expliquer les compromis. Que ton héritage rapproche les disciplines plutôt qu'il ne les enferme dans leurs frontières.",
+        "mobile": "Tu sais que les usages et les appareils changent, mais que les attentes de fiabilité et de simplicité demeurent. Que ton expérience prépare des applications capables d'évoluer sans perdre leur raison d'être.",
+        "devops": "Tu comprends que les plateformes et les pratiques d'exploitation façonnent le rythme du royaume. Que tes enseignements rendent les livraisons plus sûres et les équipes plus autonomes.",
+        "software_engineer": "Tu peux aider les bâtisseurs à discerner les solutions qui dureront de celles qui ne font que séduire. Que ton jugement devienne une ressource pour les générations futures.",
+        "data_engineer": "Tu sais que les données traversent les années, les systèmes et les frontières organisationnelles. Que ton héritage repose sur des fondations de qualité, de traçabilité et de gouvernance.",
+        "ai_engineer": "Tu sais que les techniques évoluent plus vite que les principes qui fondent la confiance. Que ton héritage distingue l'expérimentation féconde des promesses sans preuves.",
+        "game_developer": "Tu comprends que les grandes œuvres naissent d'un équilibre entre imagination, métier et contraintes. Que ton expérience aide les nouvelles générations à créer sans oublier les fondations.",
+        "qa_engineer": "Tu sais que la qualité est un héritage collectif, construit par les décisions prises bien avant les tests finaux. Que tes pratiques transmettent rigueur et confiance.",
+        "security_engineer": "Tu sais que la défense du royaume exige une vigilance continue et une mémoire des erreurs passées. Que ton héritage renforce les pratiques sans céder à la peur.",
+        "tech_lead": "Tu aides les équipes à grandir, à prendre des décisions et à transmettre leur propre savoir. Que ton leadership laisse derrière lui des bâtisseurs plus autonomes qu'à ton arrivée.",
+        "other": "Ton expérience est une chronique vivante des défis et des évolutions de ton métier. Que tes enseignements éclairent les chemins de ceux qui poursuivront l'œuvre."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "La Guilde reconnaît en toi un gardien de son savoir et de son avenir.",
+        "messageSuffix": "Le plus grand héritage d'un bâtisseur n'est pas seulement ce qu'il a construit, mais ce que les autres pourront construire grâce à lui."
+      }
+    },
+    {
+      "level": 10,
+      "id": "sovereign-of-code",
+      "minYears": 20,
+      "maxYears": null,
+      "tier": "legendary",
+      "prestige": 100,
+      "name": "Souverain éternel du Royaume du Code",
+      "shortTitle": "Souverain du Code",
+      "ceremonialTitle": "Sa Majesté, Souverain éternel du Royaume du Code, Premier Gardien des Mille Algorithmes et Seigneur des Grandes Architectures",
+      "englishTitle": "Eternal Sovereign of the Kingdom of Code",
+      "logo": {
+        "id": "sovereign",
+        "file": "/logos/level-10-sovereign.svg",
+        "alt": "Grand blason royal noir et or, avec une couronne impériale, un sceptre, deux lions héraldiques et une citadelle lumineuse.",
+        "symbol": "couronne-imperiale-citadelle",
+        "description": "Une couronne impériale domine une citadelle dorée, encadrée par deux lions héraldiques et un sceptre. L'ensemble symbolise le sommet légendaire de la hiérarchie, la maîtrise accumulée et l'héritage laissé au royaume."
+      },
+      "colors": {
+        "primary": "#171717",
+        "secondary": "#C8A24E",
+        "accent": "#FFF0B8"
+      },
+      "insignia": [
+        "La Couronne des Mille Algorithmes",
+        "Le Sceptre de l'Architecture",
+        "Le Grand Sceau du Royaume",
+        "Les Lions de la Guilde"
+      ],
+      "motto": "Ex sapientia, regnum construitur.",
+      "mottoTranslation": "Par la sagesse se bâtit le royaume.",
+      "ceremony": "Au sommet de la Grande Citadelle, les bannières de toutes les provinces se rassemblent. Le Grand Conseil fait déposer la Couronne des Mille Algorithmes devant celui dont la longue expérience symbolise le plus haut rang de la Guilde. Cette cérémonie ne prétend pas proclamer une perfection inaccessible : elle célèbre le chemin parcouru, la connaissance accumulée et la responsabilité de transmettre. Le souverain du code est celui dont l'œuvre peut inspirer le royaume bien au-delà de ses propres lignes.",
+      "proclamation": "QU'ON FASSE RÉSONNER LES CLOCHES DU ROYAUME ! QUE LES BANNIÈRES SOIENT DÉPLOYÉES DEPUIS LES ATELIERS LES PLUS MODESTES JUSQU'AUX PLUS HAUTES CITADELLES ! Aujourd'hui, devant les maîtres, les chevaliers, les architectes et les gardiens des archives, la Guilde proclame l'avènement symbolique d'un Souverain éternel du Royaume du Code ! Depuis de longues années, les saisons du numérique ont défilé : de nouvelles langues sont apparues, des architectures se sont élevées, des empires technologiques ont prospéré et d'autres se sont effondrés. Mais l'art de raisonner, de construire, de comprendre et de transmettre demeure. La couronne qui t'est remise n'est pas celle de l'infaillibilité, car même les plus grands bâtisseurs rencontrent l'inconnu. Elle est le symbole d'un parcours consacré à la création, à la résolution des énigmes et à la quête incessante de meilleures solutions. Que ton expérience éclaire les chemins encore inexplorés ! Que tes œuvres inspirent les générations à venir ! Que ton nom figure dans les chroniques de la Guilde, non pour avoir prétendu tout savoir, mais pour avoir consacré une part de ta vie à bâtir ce que le royaume n'avait pas encore imaginé ! PAR LE GRAND SCEAU ET LES MILLE ALGORITHMES, QUE SOIT HONORÉ LE SOUVERAIN DU CODE !",
+      "virtues": [
+        "Sagesse accumulée",
+        "Vision historique",
+        "Transmission intergénérationnelle",
+        "Responsabilité",
+        "Humilité devant l'inconnu"
+      ],
+      "achievements": [
+        "A consacré au moins deux décennies à l'univers du développement.",
+        "A traversé plusieurs générations de technologies et de pratiques.",
+        "Peut disposer d'un recul considérable sur les systèmes, les équipes et les transformations techniques.",
+        "Possède potentiellement un héritage de connaissances et de réalisations dont d'autres peuvent bénéficier.",
+        "Représente le rang symbolique ultime du Registre."
+      ],
+      "roleMessages": {
+        "frontend": "Souverain des Interfaces, gardien des Portes de l'Expérience et architecte des royaumes visibles, tu sais que la véritable grandeur ne réside pas dans l'éclat d'un écran, mais dans la simplicité avec laquelle chacun peut accomplir ce qu'il est venu faire. Que les interfaces que tu inspires demeurent des ponts entre la technologie et l'humanité.",
+        "backend": "Souverain des Mécanismes Invisibles, gardien des fondations et maître des flux qui animent les citadelles, tu connais la puissance des systèmes que l'on ne voit jamais mais dont tout dépend. Que tes enseignements permettent aux générations futures de bâtir des services fiables, cohérents et dignes de confiance.",
+        "fullstack": "Souverain des Deux Royaumes, gardien des façades et des profondeurs, tu sais relier les mondes visibles aux mécanismes qui les soutiennent. Que ton héritage rappelle aux bâtisseurs que la grandeur d'un système naît de la cohérence de toutes ses parties.",
+        "mobile": "Souverain des Royaumes Portatifs, gardien des outils qui accompagnent les voyageurs, tu sais que la technologie la plus puissante est parfois celle qui se fait oublier. Que ton héritage aide les générations futures à créer des expériences fiables, accessibles et libres des contraintes inutiles.",
+        "devops": "Souverain des Routes de Production, gardien des fortifications et maître des passages entre création et exploitation, tu sais que les plus beaux ouvrages ne valent rien s'ils ne peuvent être livrés et entretenus. Que ton héritage fasse des déploiements un chemin maîtrisé plutôt qu'une épreuve de courage.",
+        "software_engineer": "Souverain des Grands Ouvrages Logiciels, gardien des principes de conception et arbitre des compromis, tu sais que la véritable maîtrise consiste autant à choisir ce qu'il faut construire qu'à renoncer à ce qui ne sert pas le royaume. Que ton héritage inspire des systèmes utiles, durables et compréhensibles.",
+        "data_engineer": "Souverain des Archives et des Fleuves de Données, gardien de la mémoire du royaume, tu sais que toute décision repose sur la qualité de ce qui la nourrit. Que ton héritage préserve l'intégrité, la traçabilité et la valeur des connaissances transmises aux générations futures.",
+        "ai_engineer": "Souverain des Arts de l'Intelligence, explorateur des frontières du calcul et gardien du discernement, tu sais que la puissance d'un modèle ne dispense jamais de comprendre ses limites. Que ton héritage enseigne à unir l'audace scientifique, la mesure des résultats et la responsabilité de leurs usages.",
+        "game_developer": "Souverain des Mondes Imaginaires, architecte des quêtes et maître des règles qui donnent vie aux univers, tu sais qu'une œuvre remarquable invite les autres à vivre des aventures qu'ils n'auraient jamais imaginées. Que ton héritage inspire des générations de créateurs à unir imagination, maîtrise et émotion.",
+        "qa_engineer": "Souverain de la Qualité, gardien des épreuves et protecteur de la confiance du royaume, tu sais que les défauts invisibles peuvent renverser les plus belles ambitions. Que ton héritage rappelle que la qualité se construit à chaque décision et que la confiance se mérite par des preuves.",
+        "security_engineer": "Souverain des Secrets et des Fortifications, gardien des clés du royaume et adversaire des menaces invisibles, tu sais que la sécurité est une vigilance permanente plutôt qu'une victoire définitive. Que ton héritage enseigne aux bâtisseurs à protéger sans aveugler et à défendre sans cesser de comprendre.",
+        "tech_lead": "Souverain des Compagnies de Bâtisseurs, guide des grandes décisions et gardien de l'intelligence collective, tu sais que la plus grande réussite d'un chef n'est pas de devenir indispensable, mais de faire grandir ceux qui construiront après lui. Que ton héritage soit une génération d'équipes plus autonomes, plus fortes et plus sages.",
+        "other": "Souverain de ton art, gardien des savoirs accumulés et témoin des transformations du royaume, tu portes le symbole d'un long parcours consacré à résoudre, créer et transmettre. Que ton héritage inspire ceux qui emprunteront après toi les chemins encore inexplorés."
+      },
+      "personalization": {
+        "titleTemplate": "{shortTitle}",
+        "messagePrefix": "Le Grand Conseil, les maîtres des ateliers et les gardiens des chroniques s'inclinent devant ton parcours.",
+        "messageSuffix": "Que les générations futures se souviennent de tes œuvres, apprennent de tes erreurs et poursuivent les constructions que tu auras rendues possibles. Le royaume est plus vaste que n'importe quel bâtisseur, mais chaque bâtisseur peut contribuer à le transformer."
+      }
+    }
+  ],
+  "resultTemplate": {
+    "eyebrow": "LE GRAND REGISTRE DE LA GUILDE",
+    "heading": "Le royaume reconnaît ton nom",
+    "rankLabel": "Titre de noblesse",
+    "roleLabel": "Art exercé",
+    "experienceLabel": "Années au service du code",
+    "proclamationLabel": "Proclamation royale",
+    "specializationLabel": "Le serment de ton ordre",
+    "virtuesLabel": "Les vertus de ton rang",
+    "achievementsLabel": "Les exploits reconnus",
+    "mottoLabel": "Devise de ton blason",
+    "shareTextTemplate": "Par le Grand Sceau de la Guilde, je suis reconnu comme {ceremonialTitle} après {yearsOfExperience} année(s) consacrée(s) à l'art du code. Ma devise : « {mottoTranslation} » Que les chroniques numériques retiennent mon passage ! #TheHustleTranslator #DevelopersDay",
+    "footer": "Les titres sont symboliques. La véritable noblesse du code se mesure aussi à ce que tu construis, à ce que tu apprends et à ce que tu transmets."
+  }
+}

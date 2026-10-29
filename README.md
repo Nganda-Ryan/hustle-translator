@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Medail — Hustle Translator
 
-## Getting Started
+**Hustle Translator** (*The Hustle Translator*) est une expérience web ludique dans l’univers du *Royaume des Mille Algorithmes*. Tu indiques ton rôle de développeur, tes années d’expérience et ton nom : la Guilde te décerne un **rang**, un **blason**, une **proclamation** et un titre de noblesse numérique à partager.
 
-First, run the development server:
+> Les rangs sont calculés à partir des années d’expérience (facteur principal) et personnalisés selon le rôle. C’est une célébration humoristique, pas une mesure objective de compétence.
+
+## Fonctionnalités
+
+- Parcours guidé : choix du rôle, curseur d’ancienneté (0–80 ans), forge du titre
+- **10 niveaux** (*Écuyer* → *Souverain du Code*) avec logos SVG, couleurs, devise et cérémonie
+- Révélation animée, confettis, fil de progression vers le rang suivant
+- **Partage** par lien (`role`, `years`, `name`, optionnel `lang`)
+- Copie du texte de proclamation pour les réseaux
+- **Internationalisation** : français (données de base) et anglais (patch UI + contenu via `public/datas/i18n/en.json`)
+
+## Stack technique
+
+| Couche | Technologie |
+|--------|-------------|
+| Framework | [Next.js](https://nextjs.org) 16 (App Router) |
+| UI | React 19, [Tailwind CSS](https://tailwindcss.com) 4 (Turbopack) |
+| Typographie | Google Fonts — Pirata One, Pixelify Sans |
+| Effets | [canvas-confetti](https://www.npmjs.com/package/canvas-confetti) |
+| Langage | TypeScript |
+
+## Démarrage
+
+Prérequis : **Node.js** 20+ et npm (ou pnpm / yarn / bun).
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Autres commandes :
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build   # build de production
+npm run start   # serveur après build
+npm run lint    # ESLint (eslint-config-next)
+```
 
-## Learn More
+## Structure du dépôt
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/                    # layout, page, styles globaux (hustle-template.css)
+components/
+  hustle/               # HustleTranslator, RankRoad, RevealPanel, ActionDock…
+  i18n/                 # LocaleProvider, LanguageSwitcher
+hooks/
+  useHustleData.ts      # charge datas.json + patch de locale
+lib/
+  hustle/               # calcul du rang, partage URL, validation, messages
+  i18n/                 # locales, messages UI, fusion des traductions
+  types/                # types TypeScript (HustleData, HustleResult…)
+public/
+  datas/datas.json      # registre royal (rôles, rangs, lore) — source FR
+  datas/i18n/en.json    # surcharge anglaise du contenu
+  logos/                # blasons par niveau (level-01 … level-10)
+scripts/
+  generate-en-locale.mjs  # génère / met à jour en.json à partir de datas.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Données et contenu
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Le cœur métier vit dans **`public/datas/datas.json`** (version projet `2.0.0` dans le fichier). Les règles d’évaluation, les options de rôle, les rangs (seuils `minYears` / `maxYears`), proclamations et métadonnées des blasons y sont déclarés.
 
-## Deploy on Vercel
+Au runtime, l’app charge ce JSON puis applique le patch de locale (`mergeLocaleData`) et les messages UI (`lib/i18n/messages/`). La préférence de langue est persistée côté client (`localeStorage`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Pour régénérer le patch anglais après modification du registre :
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+node scripts/generate-en-locale.mjs
+```
+
+## Partage de profil
+
+Exemple d’URL :
+
+```
+http://localhost:3000/?role=fullstack&years=5&name=Jean%20Dupont&lang=en
+```
+
+Les paramètres inconnus ou invalides sont ignorés ou normalisés selon la logique dans `lib/hustle/shareUrl.ts`.
+
+## Déploiement
+
+Application Next.js standard : build (`npm run build`) puis exécution de `npm run start` sur la plateforme de ton choix (Vercel, Render, etc.). Les fichiers sous `public/` sont servis tels quels ; aucune base de données n’est requise.
+
+## Licence
+
+Projet privé (`"private": true` dans `package.json`). Adapter selon la politique de ton organisation si tu ouvres le dépôt.
