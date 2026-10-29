@@ -20,7 +20,8 @@ export function RevealPanel({ data, result, play }: Props) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const { messages } = useLocale();
   const { rank } = result;
-  const phrase = getDisplayPhrase(result, 0);
+  const motto = getDisplayPhrase(result, 2);
+  const personalMessage = getDisplayPhrase(result, 0);
 
   useEffect(() => {
     if (play && titleRef.current) {
@@ -48,36 +49,39 @@ export function RevealPanel({ data, result, play }: Props) {
     >
       {play ? <ConfettiBurst active colors={rank.colors} /> : null}
 
-      <div className="crest">
-        <Image
-          src={getMedailPath(rank.level)}
-          alt={rank.logo.alt}
-          width={200}
-          height={200}
-          priority
-          className="reveal-medail"
-          style={{
-            width: "clamp(120px, 32vw, 200px)",
-            height: "auto",
-          }}
-        />
-      </div>
-      <p className="rname">{result.fullName}</p>
-      <p className="lvl">
-        {formatMessage(messages.levelLine, {
-          level: rank.level,
-          years: yearsLabel,
-        })}
-      </p>
-      <h2 className="rtitle" ref={titleRef} tabIndex={-1}>
-        {rank.shortTitle}
-      </h2>
-      <p className="phrase">{phrase}</p>
+      <div className="reveal-split">
+        <div className="reveal-identity">
+          <div className="crest">
+            <div className="crest-frame">
+              <Image
+                src={getMedailPath(rank.level)}
+                alt={rank.logo.alt}
+                fill
+                sizes="(max-width: 640px) 48vw, 280px"
+                priority
+                className="reveal-medail"
+              />
+            </div>
+          </div>
+          <p className="rname">{result.fullName}</p>
+          <p className="lvl">
+            {formatMessage(messages.levelLine, {
+              level: rank.level,
+              years: yearsLabel,
+            })}
+          </p>
+          <h2 className="rtitle" ref={titleRef} tabIndex={-1}>
+            {rank.shortTitle}
+          </h2>
+          <p className="motto">{motto}</p>
+          <p className="phrase">{personalMessage}</p>
+        </div>
 
-      <details className="proclaim-block" open>
-        <summary>{data.resultTemplate.proclamationLabel}</summary>
-        <p>{rank.proclamation}</p>
-      </details>
+        <details className="proclaim-block reveal-proclaim" open>
+          <summary>{data.resultTemplate.proclamationLabel}</summary>
+          <p>{rank.proclamation}</p>
+        </details>
+      </div>
     </section>
   );
 }

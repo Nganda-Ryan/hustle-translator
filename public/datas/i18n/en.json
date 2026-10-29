@@ -79,7 +79,7 @@
     }
   },
   "rankRules": {
-    "invalidInputMessage": "The Grand Registry does not recognize this duration. Enter a whole number between 0 and 80.",
+    "invalidInputMessage": "The Grand Registry does not recognize this duration. Enter a whole number between 0 and 20.",
     "rankNotFoundMessage": "The royal scribe found no rank matching your path."
   },
   "resultTemplate": {

@@ -53,7 +53,7 @@ export function parseProfileShareParams(
   }
 
   const years = Number(yearsRaw);
-  if (!Number.isInteger(years) || years < 0 || years > 80) {
+  if (!Number.isInteger(years) || years < 0 || years > 20) {
     return null;
   }
 

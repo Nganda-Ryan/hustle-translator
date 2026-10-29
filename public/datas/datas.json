@@ -19,7 +19,7 @@
       "experienceUnit": "years",
       "rounding": "floor",
       "minExperience": 0,
-      "maxExperience": 80,
+      "maxExperience": 20,
       "rankingNote": "Les années déterminent le rang dans cette version ludique. Le rôle personnalise le titre, les exploits et la proclamation. L'ancienneté ne constitue pas à elle seule une mesure réelle de compétence."
     }
   },
@@ -105,7 +105,7 @@
       "type": "number",
       "required": true,
       "min": 0,
-      "max": 80,
+      "max": 20,
       "step": 1,
       "helpText": "Compte les années d'expérience réelle en développement, et non le nombre de langages que tu as installés sur ton ordinateur."
     }
@@ -114,7 +114,7 @@
     "matching": "first_matching_range",
     "minInclusive": true,
     "maxInclusive": true,
-    "invalidInputMessage": "Le Grand Registre ne reconnaît pas cette durée. Présente un nombre entier compris entre 0 et 80.",
+    "invalidInputMessage": "Le Grand Registre ne reconnaît pas cette durée. Présente un nombre entier compris entre 0 et 20.",
     "unknownRoleFallback": "other",
     "rankNotFoundMessage": "Le scribe royal n'a trouvé aucun rang correspondant à ton parcours."
   },

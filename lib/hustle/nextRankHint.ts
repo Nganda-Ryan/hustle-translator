@@ -38,29 +38,3 @@ export function nextRankHint(
     unit,
   });
 }
-
-export function roadCaption(
-  years: number,
-  ranks: Rank[],
-  forged: boolean,
-  ui: UiMessages
-): string {
-  const current = findRank(years, ranks);
-  const level = current?.level ?? 1;
-
-  if (level >= 10) {
-    return ui.roadMax;
-  }
-
-  const remaining = 10 - level;
-  const base = forged
-    ? formatMessage(ui.roadForged, { level })
-    : formatMessage(ui.roadPreview, { level });
-
-  const tail =
-    remaining > 1
-      ? formatMessage(ui.roadRemainingMany, { count: remaining })
-      : formatMessage(ui.roadRemainingOne, { count: remaining });
-
-  return `${base} ${tail}`;
-}

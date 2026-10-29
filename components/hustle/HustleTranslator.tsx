@@ -11,7 +11,7 @@ import { buildHustleResult } from "@/lib/hustle/buildHustleResult";
 import { findRank } from "@/lib/hustle/findRank";
 import { formatShareText } from "@/lib/hustle/formatShareText";
 import { getDisplayPhrase } from "@/lib/hustle/getDisplayPhrase";
-import { nextRankHint, roadCaption } from "@/lib/hustle/nextRankHint";
+import { nextRankHint } from "@/lib/hustle/nextRankHint";
 import {
   buildProfileShareUrl,
   clearProfileShareUrl,
@@ -22,7 +22,6 @@ import type { HustleData, HustleResult } from "@/lib/types/hustle";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { ActionDock } from "@/components/hustle/ActionDock";
-import { RankRoad } from "@/components/hustle/RankRoad";
 import { RevealPanel } from "@/components/hustle/RevealPanel";
 import { RoleChipStrip } from "@/components/hustle/RoleChipStrip";
 import { Toast } from "@/components/hustle/Toast";
@@ -163,8 +162,6 @@ export function HustleTranslator({ data }: Props) {
     [years, data.ranks]
   );
 
-  const currentLevel = previewRank?.level ?? 1;
-
   const previewTitle =
     forged && result
       ? result.rank.shortTitle
@@ -175,7 +172,7 @@ export function HustleTranslator({ data }: Props) {
   const previewHint =
     forged && result
       ? nextRankHint(result.years, data.ranks, messages)
-      : nextRankHint(years, data.ranks, messages);
+      : "";
 
   const showToast = useCallback((message: string) => {
     setToast(message);
@@ -280,7 +277,7 @@ export function HustleTranslator({ data }: Props) {
     }
   };
 
-  const isleClass = `isle${playReveal ? " isle-play" : ""}`;
+  const isleClass = "isle";
   const canForge = Boolean(role && fullName.trim());
 
   return (
@@ -382,21 +379,6 @@ export function HustleTranslator({ data }: Props) {
             />
           )}
 
-          <div
-            className="road"
-            aria-label={t("roadAria")}
-          >
-            <p className="road-cap">
-              {roadCaption(years, data.ranks, forged, messages)}
-            </p>
-            <RankRoad
-              ranks={data.ranks}
-              currentLevel={
-                forged && result ? result.rank.level : currentLevel
-              }
-              forged={forged}
-            />
-          </div>
         </div>
 
         <details className="foot-legal">

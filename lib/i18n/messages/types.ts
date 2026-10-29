@@ -19,7 +19,6 @@ export type UiMessages = {
   shareShort: string;
   modify: string;
   footLegalSummary: string;
-  roadAria: string;
   toastLinkCopied: string;
   toastCopyFailed: string;
   languageLabel: string;
@@ -32,11 +31,6 @@ export type UiMessages = {
   nextRankNeedYears: string;
   nextRankSoon: string;
   presentYears: string;
-  roadMax: string;
-  roadForged: string;
-  roadPreview: string;
-  roadRemainingOne: string;
-  roadRemainingMany: string;
   fullNameRequired: string;
   fullNameTooLong: string;
 };

@@ -322,12 +322,6 @@
   box-shadow: inset 0 0 0 3px var(--parch2);
 }
 
-.isle-play .road .step.done,
-.isle-play .road .step.cur {
-  animation: pop 0.35s both;
-  animation-delay: calc(var(--i) * 70ms);
-}
-
 .parch {
   background: var(--parch);
   border: 4px solid var(--ink);
@@ -356,27 +350,27 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  padding: 4px 0 10px;
+  gap: 6px;
+  padding: 2px 0 6px;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
   width: auto;
   max-width: 100%;
-  min-height: 2.875rem;
-  padding: 11px 18px;
+  min-height: 0;
+  padding: 6px 10px;
   box-sizing: border-box;
   background: #fbf4dc;
   border: 3px solid var(--ink);
   border-radius: 999px;
   box-shadow: 0 3px 0 var(--ink);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.2;
   white-space: nowrap;
   transition:
     transform 0.08s,
@@ -385,7 +379,7 @@
 }
 
 .chip .e {
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1;
   flex-shrink: 0;
 }
@@ -527,109 +521,107 @@
   font-size: 13px;
 }
 
-.road {
-  margin-top: 8px;
-  padding: 8px 10px 6px;
-  background: rgba(37, 56, 74, 0.88);
-  border: 3px solid var(--ink);
-  border-radius: 6px;
+.isle-body:has(.reveal) {
   overflow: hidden;
-  flex-shrink: 0;
-  width: 100%;
-  box-sizing: border-box;
 }
 
-.road ol {
-  display: flex;
-  width: 100%;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  min-width: 0;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.step {
-  flex: 1 1 0;
-  min-width: 0;
-  text-align: center;
-  color: #cdd8e0;
-  font-size: 10px;
-  position: relative;
+.isle-body > .parch.reveal {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.step .medail-thumb {
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 2px;
-  position: relative;
-  z-index: 1;
-  max-height: 32px;
-}
-
-.step .num-badge {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 2px;
-  border: 2px solid #5d7488;
-  border-radius: 50%;
-  font-weight: 600;
-  font-size: 13px;
-  position: relative;
-  z-index: 1;
-  background: rgba(37, 56, 74, 0.95);
-}
-
-.step.lock .medail-thumb {
-  filter: brightness(0) opacity(0.4);
-}
-
-.step.cur .medail-thumb {
-  filter: drop-shadow(0 0 6px var(--gold)) drop-shadow(0 0 2px var(--gold));
-  scale: 1.2;
-}
-
-.step.cur {
-  color: var(--gold);
-  font-weight: 600;
-}
-
-.step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 15px;
-  left: calc(50% + 17px);
-  width: calc(100% - 34px);
-  height: 3px;
-  background: #5d7488;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.road-cap {
-  margin: 0 0 4px 2px;
-  color: #cdd8e0;
-  font-size: 11px;
-  white-space: nowrap;
+  min-height: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 8px 10px;
 }
 
 .reveal {
-  text-align: center;
   position: relative;
+  min-height: 0;
+}
+
+.reveal-split {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: 8px 10px;
+  align-items: stretch;
+}
+
+.reveal-identity {
+  text-align: center;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.reveal-proclaim {
+  margin-top: 0;
+  text-align: left;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-left: 2px dashed var(--parch2);
+  padding-left: 8px;
+}
+
+.reveal .crest {
+  margin: 0;
+}
+
+.reveal .crest-frame {
+  position: relative;
+  width: clamp(132px, 44vw, 200px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  margin-bottom: -6px;
 }
 
 .reveal .crest img {
-  filter: drop-shadow(0 6px 0 rgba(20, 40, 50, 0.25));
+  object-fit: contain;
+  filter: drop-shadow(0 3px 0 rgba(20, 40, 50, 0.22));
+}
+
+.reveal .rname {
+  margin: 0;
+  font-size: 13px;
+}
+
+.reveal .lvl {
+  margin: 2px 0 0;
+  font-size: 11px;
+}
+
+.reveal .rtitle {
+  margin: 2px 0 4px;
+  font-size: clamp(17px, 3.8vw, 28px);
+  line-height: 1.05;
+}
+
+.reveal .motto {
+  margin: 0 0 4px;
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--ink2);
+  font-style: italic;
+}
+
+.reveal .phrase {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: left;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .rname {
@@ -672,7 +664,7 @@
 }
 
 .proclaim-block summary {
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
   font-weight: 600;
   color: var(--ink2);
@@ -680,36 +672,78 @@
 
 .proclaim-block p {
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--ink2);
-  max-height: 8em;
+  margin: 0;
+}
+
+.reveal-proclaim p {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.reveal-proclaim summary {
+  flex-shrink: 0;
+  font-size: 15px;
+  margin-bottom: 6px;
+  pointer-events: none;
+  list-style: none;
+}
+
+.reveal-proclaim summary::-webkit-details-marker {
+  display: none;
 }
 
 @media (min-width: 640px) {
-  .proclaim-block {
-    margin-top: 12px;
+  .isle-body > .parch.reveal {
+    padding: 10px 12px;
+  }
+
+  .reveal-split {
+    gap: 10px 16px;
+    grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+  }
+
+  .reveal .crest-frame {
+    width: clamp(156px, 26vw, 228px);
+    margin-bottom: -8px;
+  }
+
+  .reveal .motto {
+    font-size: 13px;
+  }
+
+  .reveal .phrase {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .reveal-proclaim {
+    padding-left: 14px;
+  }
+
+  .reveal-proclaim summary {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .reveal-proclaim p {
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   .proclaim-block summary {
-    font-size: 16px;
+    font-size: 20px;
     pointer-events: none;
     list-style: none;
   }
 
   .proclaim-block summary::-webkit-details-marker {
     display: none;
-  }
-
-  .proclaim-block[open] summary {
-    margin-bottom: 8px;
-  }
-
-  .proclaim-block p {
-    font-size: 17px;
-    line-height: 1.6;
-    max-height: none;
-    overflow: visible;
   }
 }
 
@@ -729,7 +763,7 @@
   display: none;
 }
 
-.reveal.play .crest img {
+.reveal.play .crest-frame {
   animation: stamp 0.7s cubic-bezier(0.2, 1.6, 0.4, 1) both;
 }
 
@@ -737,25 +771,24 @@
   top: 64px;
 }
 
-.reveal.play .lvl {
+.reveal.play .reveal-identity .lvl {
   animation: rise 0.4s 0.7s both;
 }
 
-.reveal.play .rtitle {
+.reveal.play .reveal-identity .rtitle {
   animation: rise 0.5s 0.95s both;
 }
 
-.reveal.play .phrase {
-  animation: rise 0.5s 1.4s both;
+.reveal.play .reveal-identity .motto {
+  animation: rise 0.5s 1.2s both;
 }
 
-.reveal.play .proclaim-block {
+.reveal.play .reveal-identity .phrase {
+  animation: rise 0.5s 1.35s both;
+}
+
+.reveal.play .reveal-proclaim {
   animation: rise 0.5s 1.6s both;
-}
-
-.reveal.play ~ .road .step.done,
-.reveal.play ~ .road .step.cur {
-  animation: none;
 }
 
 @keyframes stamp {
@@ -839,16 +872,7 @@
   justify-content: center;
 }
 
-.step.done:not(:last-child)::after,
-.step.cur:not(:last-child)::after {
-  background: var(--gold);
-}
-
 @media (max-width: 639px) {
-  .road {
-    display: none;
-  }
-
   .foot-legal {
     display: none;
   }
@@ -860,6 +884,21 @@
   .setup-roles-scroll {
     -webkit-overflow-scrolling: touch;
     padding-right: 2px;
+  }
+
+  .chip-strip {
+    gap: 5px;
+    padding-bottom: 4px;
+  }
+
+  .chip {
+    padding: 4px 7px;
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .chip .e {
+    font-size: 13px;
   }
 
   .setup-panel .hint {

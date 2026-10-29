@@ -35,7 +35,9 @@ export function ActionDock(props: Props) {
     >
       <div className="dock-preview" aria-live="polite">
         <div className="t">{props.previewTitle}</div>
-        <div className="n">{props.previewHint}</div>
+        {props.previewHint ? (
+          <div className="n">{props.previewHint}</div>
+        ) : null}
       </div>
 
       {props.mode === "setup" ? (

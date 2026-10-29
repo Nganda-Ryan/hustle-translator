@@ -55,7 +55,7 @@ Exemple (voir `.env.example`) :
 NEXT_PUBLIC_CDN_BASE_URL=https://pub-72b54eeac58b4acea61729e031dc663b.r2.dev
 ```
 
-Sans cette variable, l’app retombe sur `/public/medails/{n}.png` (fichiers locaux non versionnés).
+Sans cette variable, l’app retombe sur `/public/medal/{n}.png`.
 
 ## Structure du dépôt
 
