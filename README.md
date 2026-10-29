@@ -7,7 +7,7 @@
 ## Fonctionnalités
 
 - Parcours guidé : choix du rôle, curseur d’ancienneté (0–80 ans), forge du titre
-- **10 niveaux** (*Écuyer* → *Souverain du Code*) avec logos SVG, couleurs, devise et cérémonie
+- **10 niveaux** (*Écuyer* → *Souverain du Code*) avec médailles PNG (CDN), couleurs, devise et cérémonie
 - Révélation animée, confettis, fil de progression vers le rang suivant
 - **Partage** par lien (`role`, `years`, `name`, optionnel `lang`)
 - Copie du texte de proclamation pour les réseaux
@@ -29,6 +29,7 @@ Prérequis : **Node.js** 20+ et npm (ou pnpm / yarn / bun).
 
 ```bash
 npm install
+cp .env.example .env.local   # Windows: copy .env.example .env.local
 npm run dev
 ```
 
@@ -41,6 +42,20 @@ npm run build   # build de production
 npm run start   # serveur après build
 npm run lint    # ESLint (eslint-config-next)
 ```
+
+### Variables d'environnement
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_CDN_BASE_URL` | Origine publique du CDN (sans slash final). Les médailles sont servies à `{URL}/hustle/1.png` … `{URL}/hustle/10.png`. |
+
+Exemple (voir `.env.example`) :
+
+```env
+NEXT_PUBLIC_CDN_BASE_URL=https://pub-72b54eeac58b4acea61729e031dc663b.r2.dev
+```
+
+Sans cette variable, l’app retombe sur `/public/medails/{n}.png` (fichiers locaux non versionnés).
 
 ## Structure du dépôt
 
@@ -58,7 +73,7 @@ lib/
 public/
   datas/datas.json      # registre royal (rôles, rangs, lore) — source FR
   datas/i18n/en.json    # surcharge anglaise du contenu
-  logos/                # blasons par niveau (level-01 … level-10)
+  logos/                # métadonnées blason (alt, symbol) — visuels médailles via CDN
 scripts/
   generate-en-locale.mjs  # génère / met à jour en.json à partir de datas.json
 ```

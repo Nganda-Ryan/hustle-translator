@@ -564,13 +564,12 @@
 }
 
 .step .medail-thumb {
-  width: 32px;
-  height: 32px;
   object-fit: contain;
   display: block;
   margin: 0 auto 2px;
   position: relative;
   z-index: 1;
+  max-height: 32px;
 }
 
 .step .num-badge {
@@ -630,8 +629,6 @@
 }
 
 .reveal .crest img {
-  width: clamp(120px, 32vw, 200px);
-  height: auto;
   filter: drop-shadow(0 6px 0 rgba(20, 40, 50, 0.25));
 }
 

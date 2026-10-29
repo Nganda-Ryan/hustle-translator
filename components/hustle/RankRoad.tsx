@@ -31,9 +31,10 @@ export function RankRoad({ ranks, currentLevel, forged }: Props) {
               <Image
                 src={getMedailPath(rank.level)}
                 alt=""
-              width={32}
-              height={32}
+                width={32}
+                height={32}
                 className="medail-thumb"
+                style={{ width: 32, height: "auto" }}
                 aria-hidden
               />
             ) : (

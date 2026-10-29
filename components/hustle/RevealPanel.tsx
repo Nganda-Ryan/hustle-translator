@@ -56,6 +56,10 @@ export function RevealPanel({ data, result, play }: Props) {
           height={200}
           priority
           className="reveal-medail"
+          style={{
+            width: "clamp(120px, 32vw, 200px)",
+            height: "auto",
+          }}
         />
       </div>
       <p className="rname">{result.fullName}</p>
