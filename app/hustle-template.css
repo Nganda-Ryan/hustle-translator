@@ -522,15 +522,16 @@
 }
 
 .isle-body:has(.reveal) {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .isle-body > .parch.reveal {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  overflow: hidden;
-  padding: 8px 10px;
+  overflow: visible;
+  padding: 8px 10px 8px;
 }
 
 .reveal {
@@ -547,6 +548,10 @@
   align-items: stretch;
 }
 
+.reveal-split .reveal-identity {
+  align-self: start;
+}
+
 .reveal-identity {
   text-align: center;
   min-width: 0;
@@ -555,7 +560,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .reveal-proclaim {
@@ -577,28 +582,33 @@
 .reveal .crest-frame {
   position: relative;
   width: clamp(132px, 44vw, 200px);
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 2;
   margin-inline: auto;
-  margin-bottom: -6px;
+  margin-bottom: -8px;
+  overflow: hidden;
 }
 
-.reveal .crest img {
+.reveal .crest img,
+.reveal .reveal-medail {
   object-fit: contain;
-  filter: drop-shadow(0 3px 0 rgba(20, 40, 50, 0.22));
+  object-position: top center;
+  filter: drop-shadow(0 2px 0 rgba(20, 40, 50, 0.2));
 }
 
 .reveal .rname {
-  margin: 0;
+  margin: 6px 0 0;
   font-size: 13px;
+  line-height: 1.1;
 }
 
 .reveal .lvl {
-  margin: 2px 0 0;
+  margin: 1px 0 0;
   font-size: 11px;
+  line-height: 1.1;
 }
 
 .reveal .rtitle {
-  margin: 2px 0 4px;
+  margin: 1px 0 4px;
   font-size: clamp(17px, 3.8vw, 28px);
   line-height: 1.05;
 }
@@ -616,12 +626,14 @@
   max-width: none;
   width: 100%;
   font-size: 10px;
-  line-height: 1.4;
+  line-height: 1.45;
   text-align: left;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  display: block;
+  overflow: visible;
+  flex: 0 0 auto;
+  min-height: unset;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
 }
 
 .rname {
@@ -700,7 +712,7 @@
 
 @media (min-width: 640px) {
   .isle-body > .parch.reveal {
-    padding: 10px 12px;
+    padding: 10px 12px 10px;
   }
 
   .reveal-split {
@@ -710,7 +722,7 @@
 
   .reveal .crest-frame {
     width: clamp(156px, 26vw, 228px);
-    margin-bottom: -8px;
+    margin-bottom: -10px;
   }
 
   .reveal .motto {
@@ -768,7 +780,7 @@
 }
 
 .reveal.play::before {
-  top: 64px;
+  top: 32px;
 }
 
 .reveal.play .reveal-identity .lvl {
